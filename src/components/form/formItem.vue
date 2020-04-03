@@ -4,6 +4,7 @@
     :prop="mergeConfig.prop"
     :required="mergeConfig.required"
     :rules="mergeConfig.rules"
+    v-if="mergeConfig.visible"
   >
     <component :is="targetComponent" v-model="Provider.model[mergeConfig.prop]"></component>
   </el-form-item>

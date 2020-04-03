@@ -39,6 +39,9 @@ export default class App extends Vue {
       {
         prop: "age",
         label: "年龄",
+        visible: (model) => {
+          return model.name === "taro" ? true : false
+        },
         rules: [{ required: true, message: "请填写此项", trigger: "blur" }]
       },
       {
