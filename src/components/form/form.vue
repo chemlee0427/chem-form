@@ -1,5 +1,11 @@
 <template>
-  <el-form ref="form" :model="model" :rules="rules" @submit.native.prevent v-bind="MergeScheme.attrs">
+  <el-form
+    ref="form"
+    :model="model"
+    :rules="rules"
+    @submit.native.prevent
+    v-bind="MergeScheme.attrs"
+  >
     <template v-if="MergeScheme.DEBUG">
       <div>{{model}}</div>
     </template>
@@ -97,17 +103,24 @@ export default class extends Vue {
     });
   }
 
-  public clearValidate(): void {
-    this.getRef("form").clearValidate();
+  public clearValidate(propName?: string | string[]): void {
+    this.getRef("form").clearValidate(propName);
   }
 
-  public getItemRef(propName: string): void {
+  public getItemRef(propName: string) {
+    if (this.$scopedSlots[propName]) {
+      console.error(
+        `The '${propName}' is a slot component, please get it at outer layer`
+      );
+      return;
+    }
     const isHas = this.MergeScheme.items.find(field => field.prop === propName);
     if (!isHas) {
       console.error(`your params: '${propName}' not included in config.items`);
+      return;
     }
-  }
 
-  // public clearItemValidate(propName: string): void {}
+    return this.$refs[propName][0];
+  }
 }
 </script>

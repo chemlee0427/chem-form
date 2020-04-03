@@ -4,7 +4,7 @@
     <x-form ref="form" :scheme="formConfig" :data.sync="formData">
       <template v-slot:sex="{ model }">
         <span>{{model}}</span>
-        <el-radio v-model="model.sex" label="1">男</el-radio>
+        <el-radio ref="radio1" v-model="model.sex" label="1">男</el-radio>
         <el-radio v-model="model.sex" label="2">女</el-radio>
       </template>
       <button @click="submit">search</button>
@@ -36,7 +36,11 @@ export default class App extends Vue {
         label: "年龄",
         rules: [{ required: true, message: "请填写此项", trigger: "blur" }]
       },
-      { prop: "address", label: "地址" },
+      {
+        prop: "address",
+        label: "地址",
+        rules: [{ required: true, message: "请填写此项", trigger: "blur" }]
+      },
       { prop: "sex", label: "性别", default: "1", slot: "sex" }
     ]
   };
@@ -49,8 +53,7 @@ export default class App extends Vue {
   }
 
   reset() {
-    (this.$refs.form as any).resetForm();
-    (this.$refs.form as any).getItemRef("sex");
+    (this.$refs.form as any).clearValidate("age");
   }
 
   async submit() {

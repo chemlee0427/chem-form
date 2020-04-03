@@ -1,5 +1,5 @@
 <template>
-  <el-form-item :label="config.label" :prop="config.prop">
+  <el-form-item :label="config.label" :prop="config.prop" ref="x-form-ref">
     <component :is="targetComponent" v-model="Provider.model[config.prop]"></component>
   </el-form-item>
 </template>
