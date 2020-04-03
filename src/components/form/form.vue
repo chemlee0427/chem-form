@@ -1,11 +1,5 @@
 <template>
-  <el-form
-    ref="form"
-    :model="model"
-    :rules="rules"
-    @submit.native.prevent
-    v-bind="MergeScheme.attrs"
-  >
+  <el-form ref="form" :model="model" @submit.native.prevent v-bind="MergeScheme.attrs">
     <template v-if="MergeScheme.DEBUG">
       <div>{{model}}</div>
     </template>
@@ -23,7 +17,7 @@
 import { Vue, Component, Prop, Provide, Watch } from "vue-property-decorator";
 import { Form } from "element-ui";
 import { IFormConfig, IFormModel } from "@/typings/form";
-import { defaultFormConfig, defaultFormItemConfig } from "./defaultConfig";
+import { defaultFormConfig } from "./defaultConfig";
 import FormItem from "./formItem.vue";
 
 @Component({
@@ -43,11 +37,7 @@ export default class extends Vue {
   protected get MergeScheme(): IFormConfig {
     this.scheme.layout = { ...defaultFormConfig.layout, ...this.scheme.layout };
     this.scheme.attrs = { ...defaultFormConfig.attrs, ...this.scheme.attrs };
-    const _items = this.scheme.items.map($item => ({
-      ...defaultFormItemConfig,
-      ...$item
-    }));
-    return { ...defaultFormConfig, ...this.scheme, items: _items };
+    return { ...defaultFormConfig, ...this.scheme };
   }
 
   protected get rules() {
@@ -81,9 +71,8 @@ export default class extends Vue {
   // * We need to set the non-entered field to the default value of the field.
   @Watch("data", { deep: true })
   updateModel(newData: IFormModel) {
-    const defaultModel = this._getModelSchemeByConfig();
     Object.keys(this.model).forEach(field => {
-      this.$set(this.model, field, newData[field] || defaultModel[field]);
+      this.$set(this.model, field, newData[field] || "");
     });
   }
 

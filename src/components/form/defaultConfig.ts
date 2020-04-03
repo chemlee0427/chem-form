@@ -1,5 +1,4 @@
 import { IFormConfig } from "@/typings/form"
-import { IFormItemConfig } from "@/typings/formItem"
 
 export const defaultFormConfig: IFormConfig = {
   layout: {
@@ -12,12 +11,4 @@ export const defaultFormConfig: IFormConfig = {
     size: "small"
   },
   items: []
-}
-
-export const defaultFormItemConfig: IFormItemConfig = {
-  prop: "",
-  label: "",
-  visible: true,
-  required: false,
-  "x-component": "input"
 }

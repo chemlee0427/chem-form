@@ -30,7 +30,12 @@ export default class App extends Vue {
   formConfig: IFormConfig = {
     DEBUG: true,
     items: [
-      { prop: "name", label: "姓名", default: "atom" },
+      {
+        prop: "name",
+        label: "姓名",
+        default: "atom",
+        required: true
+      },
       {
         prop: "age",
         label: "年龄",
@@ -48,12 +53,16 @@ export default class App extends Vue {
   handleClick() {
     this.formData = {
       name: "Taro",
-      age: 23
+      age: 23,
+      address: "very good",
+      apple: 123,
+      vue: 234,
+      react: true
     };
   }
 
   reset() {
-    (this.$refs.form as any).clearValidate("age");
+    (this.$refs.form as any).clearValidate();
   }
 
   async submit() {

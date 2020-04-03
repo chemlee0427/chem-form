@@ -1,0 +1,2 @@
+export const isFunction = (target: any) => Object.prototype.toString.call(target) === "[object Function]"
+export const isArray = (target: any) => Object.prototype.toString.call(target) === "[object Array]"
