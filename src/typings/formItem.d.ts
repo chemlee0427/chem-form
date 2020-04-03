@@ -4,7 +4,7 @@ export interface IFormItemConfig {
   prop: string
   label: string
   default?: any
-  visible?: boolean | Function
+  isRender?: boolean | Function
   required?: boolean
   rules?: IFormItemRule[]
   description?: string | VNode

@@ -4,7 +4,7 @@
     :prop="mergeConfig.prop"
     :required="mergeConfig.required"
     :rules="mergeConfig.rules"
-    v-if="mergeConfig.visible"
+    v-if="mergeConfig.isRender"
   >
     <component :is="targetComponent" v-model="Provider.model[mergeConfig.prop]"></component>
   </el-form-item>
@@ -28,11 +28,11 @@ export default class extends Vue {
   @Inject() Provider!: any;
 
   get mergeConfig(): IFormItemConfig {
-    const { required, rules, visible, label } = this.config;
+    const { required, rules, isRender, label } = this.config;
     const _required = required || (isArray(rules) && (rules as []).length) ? true : false;
     const _merge: IFormItemConfig = {
       ...this.config,
-      visible: isFunction(visible) ? (visible as Function)(this.Provider.model) : true,
+      isRender: isFunction(isRender) ? (isRender as Function)(this.Provider.model) : true,
       required: _required,
       "x-component": this.config["x-component"] || "input",
       rules: rules ? rules : _required
