@@ -2,7 +2,7 @@ import Vue from 'vue'
 import App from './App.vue'
 
 Vue.config.productionTip = false
-import WFrom from "@/components/form/index"
+import WFrom from "@/form/index"
 
 Vue.use(WFrom)
 

@@ -41,13 +41,17 @@ export default class App extends Vue {
         isRender: (model) => {
           return model.name === "taro" ? true : false
         },
-        rules: [{ required: true, message: "请填写此项", trigger: "blur" }]
+        rules: [{ required: true, message: "请填写此项" }]
       },
       {
         prop: "address",
         label: "地址",
         rules: [{ required: true, message: "请填写此项" }]
       },
+      { prop: "month", label: "月份", "x-component": "number" },
+      { prop: "year", label: "年份", default: "3", "x-component": "radio" },
+      { prop: "source", label: "来源", "x-component": "select", default: 2 },
+      { prop: "work", label: "职业", "x-component": "checkbox", default: ["选中且禁用"] },
       { prop: "sex", label: "性别", default: "1", slot: "sex" }
     ]
   };

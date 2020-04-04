@@ -24,7 +24,7 @@
 import { Vue, Component, Prop, Provide, Watch } from "vue-property-decorator";
 import { Form } from "element-ui";
 import { IFormConfig, IFormModel } from "@/typings/form";
-import { defaultFormConfig } from "./defaultConfig";
+import { defaultFormConfig, defaultComponentConfig } from "./defaultConfig";
 import FormItem from "./formItem.vue";
 
 @Component({
@@ -46,20 +46,12 @@ export default class extends Vue {
     this.scheme.attrs = { ...defaultFormConfig.attrs, ...this.scheme.attrs };
     return { ...defaultFormConfig, ...this.scheme };
   }
-
-  protected get rules() {
-    return this.MergeScheme.items.reduce((merged, item) => {
-      if (item.rules) {
-        return { ...merged, [item.prop]: item.rules };
-      }
-      return merged;
-    }, {});
-  }
-
+  // 通过传入配置生成本地数据并赋默认值
   protected _getModelSchemeByConfig(): IFormModel {
     const _model: IFormModel = {};
     this.scheme.items.forEach(formItemConfig => {
-      _model[formItemConfig.prop] = formItemConfig.default || "";
+      const targetComponentConfig = defaultComponentConfig[formItemConfig["x-component"] || "input"];
+      _model[formItemConfig.prop] = formItemConfig.default || targetComponentConfig.defaultValue;
     });
     return _model;
   }
@@ -146,4 +138,4 @@ export default class extends Vue {
 }
 </script>
 
-<style lang="scss" src="./coverDef.scss" scoped></style>
+<style lang="scss" src="../style/coverDef.scss" scoped></style>

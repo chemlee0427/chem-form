@@ -9,7 +9,13 @@ export interface IFormItemConfig {
   rules?: IFormItemRule[]
   description?: string | VNode
   slot?: string
-  'x-component'?: string
+  'x-component'?: XComponentType
+  attrs?: dynamicType<any>
+  events?: dynamicType<Function>
+}
+
+export interface dynamicType<T> {
+  [propName: string]: T
 }
 
 export interface IFormItemRule {
@@ -20,4 +26,19 @@ export interface IFormItemRule {
   message?: string
   trigger?: 'blur' | 'change'
   validator?: Function
+}
+
+export type XComponentType = "input" | "number" | "select" | "radio" | "checkbox"
+
+export type XComponentPlugins = {
+  [P in XComponentType]: any
+}
+
+export type XComponentConfig = {
+  [P in XComponentType]: XComponentItemConfig
+}
+
+export type XComponentItemConfig = {
+  defaultValue: any
+  attrs: dynamicType<any>
 }

@@ -6,7 +6,11 @@
     :rules="mergeConfig.rules"
     v-if="mergeConfig.isRender"
   >
-    <component :is="targetComponent" v-model="Provider.model[mergeConfig.prop]"></component>
+    <component
+      :is="targetComponent"
+      v-model="Provider.model[mergeConfig.prop]"
+      v-bind="mergeConfig.attrs"
+    ></component>
   </el-form-item>
 </template>
 
@@ -14,8 +18,9 @@
 import { Vue, Component, Prop, Inject } from "vue-property-decorator";
 import { FormItem } from "element-ui";
 import { IFormItemConfig } from "@/typings/formItem";
-import defaultComponents from "./formItemComponents";
+import { defaultComponentConfig } from "./defaultConfig"
 import { isFunction, isArray } from "@/utils";
+import defaultComponents from "./formItemComponents";
 
 @Component({
   name: "x-form-item",
@@ -28,16 +33,18 @@ export default class extends Vue {
   @Inject() Provider!: any;
 
   get mergeConfig(): IFormItemConfig {
+    const targetComponentConfig = defaultComponentConfig[this.config["x-component"] || "input"];
     const { required, rules, isRender, label } = this.config;
     const _required = required || (isArray(rules) && (rules as []).length) ? true : false;
     const _merge: IFormItemConfig = {
       ...this.config,
       isRender: isFunction(isRender) ? (isRender as Function)(this.Provider.model) : true,
       required: _required,
-      "x-component": this.config["x-component"] || "input",
       rules: rules ? rules : _required
         ? [{ required: true, message: `${label}为必填项` }]
-        : undefined
+        : undefined,
+      "x-component": this.config["x-component"] || "input",
+      attrs: { ...targetComponentConfig.attrs, ...this.config.attrs }
     };
     return _merge;
   }
