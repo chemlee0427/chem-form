@@ -3,7 +3,6 @@
     <h2>{{formData}}</h2>
     <x-form ref="form" :scheme="formConfig" :data.sync="formData">
       <template v-slot:sex="{ model }">
-        <span>{{model}}</span>
         <el-radio ref="radio1" v-model="model.sex" label="1">男</el-radio>
         <el-radio v-model="model.sex" label="2">女</el-radio>
       </template>
@@ -54,16 +53,30 @@ export default class App extends Vue {
   };
 
   handleClick() {
-    (this.$refs.form as any).setItem("address", "山东省临沂市")
+    this.formData = {
+      name: "VUE",
+    }
+
+    console.log((this.$refs.form as any).getFormModel());
   }
 
+
   reset() {
-    (this.$refs.form as any).clearValidate();
+    (this.$refs.form as any).resetForm();
+  }
+
+  simulateHttp() {
+    return new Promise(resolve => setTimeout(() => {
+      resolve({
+        data: "name"
+      })
+    }, 2000))
   }
 
   async submit() {
-    const flag = await (this.$refs.form as any).validateForm();
-    console.log(flag);
+    (this.$refs.form as any).submit((model) => {
+      setTimeout(() => console.log(model), 1000)
+    });
   }
 }
 </script>

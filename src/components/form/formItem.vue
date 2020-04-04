@@ -45,9 +45,5 @@ export default class extends Vue {
   get targetComponent() {
     return defaultComponents[this.mergeConfig["x-component"] as string];
   }
-
-  mounted() {
-    console.log(this.mergeConfig);
-  }
 }
 </script>

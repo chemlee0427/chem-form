@@ -31,8 +31,8 @@ import FormItem from "./formItem.vue";
   name: "x-form",
   components: {
     [Form.name]: Form,
-    "form-item": FormItem
-  }
+    "form-item": FormItem,
+  },
 })
 export default class extends Vue {
   @Prop({ type: Object, required: true }) scheme!: IFormConfig;
@@ -78,17 +78,23 @@ export default class extends Vue {
   // * We need to set the non-entered field to the default value of the field.
   @Watch("data", { deep: true })
   updateModel(newData: IFormModel) {
-    Object.keys(this.model).forEach(field => {
-      this.$set(this.model, field, newData[field] || "");
-    });
+    const _mergeModel = { ...this.model, ...newData }
+    Object.keys(_mergeModel).forEach(field => {
+      this.$set(this.model, field, _mergeModel[field])
+    })
   }
 
+  // NOTE: 将多传递进来的字段删除 && 将已有的初始化
   public resetForm(): void {
     const defaultModel = this._getModelSchemeByConfig();
-    Object.keys(defaultModel).forEach(field => {
-      this.$set(this.model, field, defaultModel[field]);
+    Object.keys(this.model).forEach(field => {
+      if (Object.prototype.hasOwnProperty.call(defaultModel, field)) {
+        this.$set(this.model, field, defaultModel[field])
+      } else {
+        this.$delete(this.model, field)
+      }
     });
-    this.clearValidate();
+    this.$nextTick(() => this.clearValidate())
   }
 
   public validateForm(): Promise<boolean> {
@@ -121,6 +127,21 @@ export default class extends Vue {
     }
 
     return this.$refs[propName][0];
+  }
+
+  public getFormModel(removeNull = true): IFormModel {
+    if (removeNull) {
+      const _removeNull = {}
+      const keys = Object.keys(this.model).filter(key => this.model[key] !== null);
+      keys.forEach(key => _removeNull[key] = this.model[key])
+      return _removeNull
+    } else {
+      return this.model
+    }
+  }
+
+  public submit(cb: Function) {
+    cb(this.model)
   }
 }
 </script>
