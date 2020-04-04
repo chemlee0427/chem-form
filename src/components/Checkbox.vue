@@ -1,5 +1,5 @@
 <template>
-  <el-checkbox-group v-model="localValue">
+  <el-checkbox-group v-model="localValue" v-bind="$attrs" v-on="$listeners">
     <el-checkbox label="复选框 A"></el-checkbox>
     <el-checkbox label="复选框 B"></el-checkbox>
     <el-checkbox label="复选框 C"></el-checkbox>
@@ -27,10 +27,6 @@ export default class extends Vue {
   @Watch("localValue", { immediate: true, deep: true })
   emitUpdate(newValue) {
     this.$emit("input", newValue)
-  }
-
-  mounted() { 
-    console.log(this);
   }
 }
 </script>

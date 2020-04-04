@@ -1,5 +1,5 @@
 <template>
-  <el-select v-model="localValue" v-bind="$attrs">
+  <el-select v-model="localValue" v-bind="$attrs" v-on="$listeners">
     <el-option :label="1" :value="1"></el-option>
     <el-option :label="2" :value="2"></el-option>
   </el-select>

@@ -10,6 +10,7 @@
       :is="targetComponent"
       v-model="Provider.model[mergeConfig.prop]"
       v-bind="mergeConfig.attrs"
+      v-on="mergeConfig.events"
     ></component>
   </el-form-item>
 </template>

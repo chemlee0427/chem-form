@@ -33,7 +33,12 @@ export default class App extends Vue {
         prop: "name",
         label: "姓名",
         default: "atom",
-        required: true
+        required: true,
+        events: {
+          change: (val) => {
+            console.log(val);
+          }
+        }
       },
       {
         prop: "age",

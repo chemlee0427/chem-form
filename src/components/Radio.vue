@@ -1,5 +1,5 @@
 <template>
-  <el-radio-group v-model="localValue" v-bind="$attrs">
+  <el-radio-group v-model="localValue" v-bind="$attrs" v-on="$listeners">
     <el-radio label="3">备选项1</el-radio>
     <el-radio label="6">备选项2</el-radio>
     <el-radio label="9">备选项3</el-radio>
