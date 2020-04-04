@@ -1,5 +1,12 @@
 <template>
-  <el-form ref="form" :model="model" @submit.native.prevent v-bind="MergeScheme.attrs">
+  <el-form
+    ref="form"
+    :model="model"
+    :disabled="MergeScheme.onlyRead"
+    v-bind="MergeScheme.attrs"
+    @submit.native.prevent
+    :class="{ 'x-form-onlyRead': MergeScheme.onlyRead }"
+  >
     <template v-if="MergeScheme.DEBUG">
       <div>{{model}}</div>
     </template>
@@ -96,6 +103,10 @@ export default class extends Vue {
     this.getRef("form").clearValidate(propName);
   }
 
+  public setItem(propName: string, value: any): void {
+    this.$set(this.model, propName, value)
+  }
+
   public getItemRef(propName: string) {
     if (this.$scopedSlots[propName]) {
       console.error(
@@ -113,3 +124,5 @@ export default class extends Vue {
   }
 }
 </script>
+
+<style lang="scss" src="./coverDef.scss" scoped></style>

@@ -1,0 +1,6 @@
+.x-form-onlyRead {
+  /deep/.el-input.is-disabled .el-input__inner {
+    background-color: #fff;
+    cursor: default;
+  }
+}

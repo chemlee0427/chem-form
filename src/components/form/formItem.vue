@@ -36,10 +36,7 @@ export default class extends Vue {
       required: _required,
       "x-component": this.config["x-component"] || "input",
       rules: rules ? rules : _required
-        ? [
-          { required: true, message: `${label}为必填项`, trigger: "blur" },
-          { required: true, message: `${label}为必填项`, trigger: "change" }
-        ]
+        ? [{ required: true, message: `${label}为必填项` }]
         : undefined
     };
     return _merge;

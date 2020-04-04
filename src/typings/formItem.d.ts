@@ -18,6 +18,6 @@ export interface IFormItemRule {
   min?: number
   type?: string
   message?: string
-  trigger: 'blur' | 'change'
+  trigger?: 'blur' | 'change'
   validator?: Function
 }

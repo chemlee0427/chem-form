@@ -47,21 +47,14 @@ export default class App extends Vue {
       {
         prop: "address",
         label: "地址",
-        rules: [{ required: true, message: "请填写此项", trigger: "blur" }]
+        rules: [{ required: true, message: "请填写此项" }]
       },
       { prop: "sex", label: "性别", default: "1", slot: "sex" }
     ]
   };
 
   handleClick() {
-    this.formData = {
-      name: "Taro",
-      age: 23,
-      address: "very good",
-      apple: 123,
-      vue: 234,
-      react: true
-    };
+    (this.$refs.form as any).setItem("address", "山东省临沂市")
   }
 
   reset() {
