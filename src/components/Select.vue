@@ -1,13 +1,19 @@
 <template>
   <el-select v-model="localValue" v-bind="$attrs" v-on="$listeners">
-    <el-option :label="1" :value="1"></el-option>
-    <el-option :label="2" :value="2"></el-option>
+    <el-option
+      v-for="$option in localSource"
+      :key="$option.label"
+      :label="$option.label"
+      :value="$option.value"
+      :disabled="$option.disable"
+    ></el-option>
   </el-select>
 </template>
 
 <script lang="ts">
-import { Vue, Component, Prop, Watch } from "vue-property-decorator";
+import { Component, Mixins } from "vue-property-decorator";
 import { Select, Option } from "element-ui"
+import sourceMixin from "./Mixin"
 
 @Component({
   name: "x-form-select",
@@ -16,14 +22,5 @@ import { Select, Option } from "element-ui"
     [Select.name]: Select
   }
 })
-export default class extends Vue {
-  @Prop() value!: any
-
-  localValue = this.value
-
-  @Watch("localValue", { immediate: true, deep: true })
-  emitUpdate(newValue: any) {
-    this.$emit("input", newValue)
-  }
-}
+export default class extends Mixins(sourceMixin) { }
 </script>

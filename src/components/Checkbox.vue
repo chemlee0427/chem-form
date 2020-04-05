@@ -1,16 +1,18 @@
 <template>
   <el-checkbox-group v-model="localValue" v-bind="$attrs" v-on="$listeners">
-    <el-checkbox label="复选框 A"></el-checkbox>
-    <el-checkbox label="复选框 B"></el-checkbox>
-    <el-checkbox label="复选框 C"></el-checkbox>
-    <el-checkbox label="禁用" disabled></el-checkbox>
-    <el-checkbox label="选中且禁用" disabled></el-checkbox>
+    <el-checkbox
+      v-for="$option in localSource"
+      :key="$option.value"
+      :label="$option.value"
+      :disabled="$option.disable"
+    >{{$option.label}}</el-checkbox>
   </el-checkbox-group>
 </template>
 
 <script lang="ts">
-import { Vue, Component, Prop, Watch } from "vue-property-decorator";
+import { Component, Mixins } from "vue-property-decorator";
 import { Checkbox, CheckboxGroup } from "element-ui"
+import sourceMixin from "./Mixin"
 
 @Component({
   name: "x-form-checkbox",
@@ -19,14 +21,5 @@ import { Checkbox, CheckboxGroup } from "element-ui"
     [Checkbox.name]: Checkbox
   }
 })
-export default class extends Vue {
-  @Prop() value!: any[]
-
-  localValue = this.value
-
-  @Watch("localValue", { immediate: true, deep: true })
-  emitUpdate(newValue) {
-    this.$emit("input", newValue)
-  }
-}
+export default class extends Mixins(sourceMixin) { }
 </script>

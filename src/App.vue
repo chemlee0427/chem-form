@@ -34,7 +34,7 @@ export default class App extends Vue {
         label: "姓名",
         default: "atom",
         required: true,
-        events: {
+        listeners: {
           change: (val) => {
             console.log(val);
           }
@@ -54,9 +54,37 @@ export default class App extends Vue {
         rules: [{ required: true, message: "请填写此项" }]
       },
       { prop: "month", label: "月份", "x-component": "number" },
-      { prop: "year", label: "年份", default: "3", "x-component": "radio" },
-      { prop: "source", label: "来源", "x-component": "select", default: 2 },
-      { prop: "work", label: "职业", "x-component": "checkbox", default: ["选中且禁用"] },
+      {
+        prop: "year",
+        label: "年份",
+        "x-component": "radio",
+        source: {
+          labelKey: "label",
+          valueKey: "code",
+          data: this.simulateHttp
+        }
+      },
+      {
+        prop: "source",
+        label: "来源",
+        "x-component": "select",
+        default: "vue",
+        source: {
+          labelKey: "label",
+          valueKey: "code",
+          data: this.simulateHttp
+        }
+      },
+      {
+        prop: "work",
+        label: "职业",
+        "x-component": "checkbox",
+        source: {
+          labelKey: "label",
+          valueKey: "code",
+          data: this.simulateHttp
+        }
+      },
       { prop: "sex", label: "性别", default: "1", slot: "sex" }
     ]
   };
@@ -76,9 +104,7 @@ export default class App extends Vue {
 
   simulateHttp() {
     return new Promise(resolve => setTimeout(() => {
-      resolve({
-        data: "name"
-      })
+      resolve([{ label: "Vue", code: "vue" }, { label: "React", code: "react", disable: true }])
     }, 2000))
   }
 

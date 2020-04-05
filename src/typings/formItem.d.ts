@@ -11,7 +11,8 @@ export interface IFormItemConfig {
   slot?: string
   'x-component'?: XComponentType
   attrs?: dynamicType<any>
-  events?: dynamicType<Function>
+  listeners?: dynamicType<Function>
+  source?: IFormItemSource
 }
 
 export interface dynamicType<T> {
@@ -41,4 +42,10 @@ export type XComponentConfig = {
 export type XComponentItemConfig = {
   defaultValue: any
   attrs: dynamicType<any>
+}
+
+export interface IFormItemSource {
+  labelKey: string,
+  valueKey: string,
+  data: any[] | Function
 }

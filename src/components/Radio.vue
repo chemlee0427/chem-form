@@ -1,14 +1,18 @@
 <template>
   <el-radio-group v-model="localValue" v-bind="$attrs" v-on="$listeners">
-    <el-radio label="3">备选项1</el-radio>
-    <el-radio label="6">备选项2</el-radio>
-    <el-radio label="9">备选项3</el-radio>
+    <el-radio
+      v-for="$option in localSource"
+      :key="$option.value"
+      :label="$option.value"
+      :disabled="$option.disable"
+    >{{$option.label}}</el-radio>
   </el-radio-group>
 </template>
 
 <script lang="ts">
-import { Vue, Component, Prop, Watch } from "vue-property-decorator";
+import { Component, Mixins } from "vue-property-decorator";
 import { RadioGroup, Radio } from "element-ui"
+import sourceMixin from "./Mixin"
 
 @Component({
   name: "x-form-radio",
@@ -17,14 +21,5 @@ import { RadioGroup, Radio } from "element-ui"
     [Radio.name]: Radio
   }
 })
-export default class extends Vue {
-  @Prop() value!: any
-
-  localValue = this.value
-
-  @Watch("localValue", { immediate: true, deep: true })
-  emitUpdate(newValue: any) {
-    this.$emit("input", newValue)
-  }
-}
+export default class extends Mixins(sourceMixin) { }
 </script>
