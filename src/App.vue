@@ -86,7 +86,7 @@ export default class App extends Vue {
           data: this.simulateHttp
         }
       },
-      { prop: "sex", label: "性别", default: "1", slot: "sex", required: true }
+      { prop: "sex", label: "性别", slot: "sex", required: true }
     ]
   };
 

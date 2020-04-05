@@ -12,7 +12,14 @@
     </template>
     <template v-for="$formItem in MergeScheme.items">
       <template v-if="$formItem.slot">
-        <el-form-item :key="$formItem.prop">
+        <el-form-item
+          :key="$formItem.prop"
+          :label="$formItem.label"
+          :prop="$formItem.prop"
+          :required="$formItem.required"
+          :rules="$formItem.rules"
+          v-if="$formItem.isRender"
+        >
           <slot :name="$formItem.slot" :model="model"></slot>
         </el-form-item>
       </template>
@@ -77,7 +84,7 @@ export default class extends Vue {
 
     return { ...defaultFormConfig, ...this.scheme };
   }
-  
+
   // 通过传入配置生成本地数据并赋默认值
   protected _getModelSchemeByConfig(): IFormModel {
     const _model: IFormModel = {};
