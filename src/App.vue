@@ -28,6 +28,7 @@ export default class App extends Vue {
   formData: any = {};
   formConfig: IFormConfig = {
     DEBUG: true,
+    // onlyRead: true,
     items: [
       {
         prop: "name",

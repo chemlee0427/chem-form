@@ -34,7 +34,7 @@ import { Vue, Component, Prop, Provide, Watch } from "vue-property-decorator";
 import { Form, FormItem } from "element-ui";
 import { IFormConfig, IFormModel } from "@/typings/form";
 import { defaultFormConfig, defaultComponentConfig } from "./defaultConfig";
-import { isArray, isFunction } from "@/utils/index";
+import { isArray, isFunction, deepCopy } from "@/utils/index";
 import XFormItem from "./formItem.vue";
 
 @Component({
@@ -61,17 +61,19 @@ export default class extends Vue {
     // * 是否渲染，默认自带组件配置
     this.scheme.items = this.scheme.items.map($item => {
       const { required, rules, isRender, label } = $item;
-      const targetComponentConfig = defaultComponentConfig[$item["x-component"] || "input"];
-      const _required = required || (isArray(rules) && (rules as []).length) ? true : false;
+      let targetComponentConfig = defaultComponentConfig[$item["x-component"] || "input"];
+
+      targetComponentConfig = this.setPlaceholderType(targetComponentConfig, $item.label); // placeholder配置
+      const _required = required || (isArray(rules) && (rules as []).length) ? true : false; // 智能设置required和rules关系
       return {
         ...$item,
-        isRender: isFunction(isRender) ? (isRender as Function)(this.Provider.model) : true,
         required: _required,
+        isRender: isFunction(isRender) ? (isRender as Function)(this.Provider.model) : true,
+        attrs: { ...targetComponentConfig.attrs, ...$item.attrs },
+        "x-component": $item["x-component"] || "input",
         rules: rules ? rules : _required
           ? [{ required: true, message: `${label}为必填项` }]
           : undefined,
-        "x-component": $item["x-component"] || "input",
-        attrs: { ...targetComponentConfig.attrs, ...$item.attrs }
       }
     })
 
@@ -83,6 +85,19 @@ export default class extends Vue {
     }
 
     return { ...defaultFormConfig, ...this.scheme };
+  }
+
+  // NODE: 通过form.onlyRead设置每个组件的placeholder
+  protected setPlaceholderType(defaultConfig, label) {
+    const _defaultConfig = deepCopy(defaultConfig) as any
+    if (this.scheme.onlyRead && defaultConfig.attrs.placeholder) {
+      _defaultConfig.attrs.placeholder = ""
+    }
+    else if (!this.scheme.onlyRead && defaultConfig.attrs.placeholder) {
+      _defaultConfig.attrs.placeholder = defaultConfig.attrs.placeholder + label
+    }
+
+    return _defaultConfig
   }
 
   // 通过传入配置生成本地数据并赋默认值

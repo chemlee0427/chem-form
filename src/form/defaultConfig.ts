@@ -8,7 +8,6 @@ export const defaultFormConfig: IFormConfig = {
     gutter: 24,
   },
   attrs: {
-    inline: true,
     size: "small"
   },
   onlyRead: false,
@@ -19,19 +18,22 @@ export const defaultComponentConfig: XComponentConfig = {
   "input": {
     defaultValue: "",
     attrs: {
-      clearable: true
+      clearable: true,
+      placeholder: "请输入"
     }
   },
   "number": {
     defaultValue: undefined,
     attrs: {
-      "controls-position": "right"
+      "controls-position": "right",
+      placeholder: "请输入"
     }
   },
   "select": {
     defaultValue: "",
     attrs: {
-      clearable: true
+      clearable: true,
+      placeholder: "请选择"
     }
   },
   "radio": {
