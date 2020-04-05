@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <h2>{{formData}}</h2>
-    <x-form ref="form" :scheme="formConfig" :data.sync="formData">
+    <x-form ref="form" :scheme="formConfig" :data.sync="formData" custom-class="fpx">
       <template v-slot:sex="{ model }">
         <el-radio ref="radio1" v-model="model.sex" label="1">插槽进来的1</el-radio>
         <el-radio v-model="model.sex" label="2">插槽进来的2</el-radio>

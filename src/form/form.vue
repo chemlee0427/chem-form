@@ -5,7 +5,7 @@
     :disabled="MergeScheme.onlyRead"
     v-bind="MergeScheme.attrs"
     @submit.native.prevent
-    :class="{ 'x-form-onlyRead': MergeScheme.onlyRead }"
+    :class="[customClass, { 'x-form-onlyRead': MergeScheme.onlyRead}]"
   >
     <template v-if="MergeScheme.DEBUG">
       <div>{{model}}</div>
@@ -49,6 +49,7 @@ export default class extends Vue {
   @Prop({ type: Object, required: true }) scheme!: IFormConfig;
   @Prop(Object) data!: IFormModel;
   @Prop({ type: Array, default: undefined }) auth!: string[] | undefined; // NODE: 认证权限
+  @Prop(String) customClass!: string
   @Provide() Provider = this;
 
   model: IFormModel = this._getModelSchemeByConfig();
