@@ -25,18 +25,20 @@ import { Vue, Component, Prop, Provide, Watch } from "vue-property-decorator";
 import { Form } from "element-ui";
 import { IFormConfig, IFormModel } from "@/typings/form";
 import { defaultFormConfig, defaultComponentConfig } from "./defaultConfig";
+import { isArray } from "@/utils/index";
 import FormItem from "./formItem.vue";
 
 @Component({
   name: "x-form",
   components: {
     [Form.name]: Form,
-    "form-item": FormItem,
-  },
+    "form-item": FormItem
+  }
 })
 export default class extends Vue {
   @Prop({ type: Object, required: true }) scheme!: IFormConfig;
   @Prop(Object) data!: IFormModel;
+  @Prop({ type: Array, default: undefined }) auth!: string[] | undefined; // NODE: 认证权限
   @Provide() Provider = this;
 
   model: IFormModel = this._getModelSchemeByConfig();
@@ -44,6 +46,11 @@ export default class extends Vue {
   protected get MergeScheme(): IFormConfig {
     this.scheme.layout = { ...defaultFormConfig.layout, ...this.scheme.layout };
     this.scheme.attrs = { ...defaultFormConfig.attrs, ...this.scheme.attrs };
+    if (isArray(this.auth)) {
+      this.scheme.items = this.scheme.items.filter(
+        $item => (this.auth as string[]).indexOf($item.prop) !== -1
+      );
+    }
     return { ...defaultFormConfig, ...this.scheme };
   }
   // 通过传入配置生成本地数据并赋默认值
@@ -70,10 +77,10 @@ export default class extends Vue {
   // * We need to set the non-entered field to the default value of the field.
   @Watch("data", { deep: true })
   updateModel(newData: IFormModel) {
-    const _mergeModel = { ...this.model, ...newData }
+    const _mergeModel = { ...this.model, ...newData };
     Object.keys(_mergeModel).forEach(field => {
-      this.$set(this.model, field, _mergeModel[field])
-    })
+      this.$set(this.model, field, _mergeModel[field]);
+    });
   }
 
   // NOTE: 将多传递进来的字段删除 && 将已有的初始化
@@ -81,12 +88,12 @@ export default class extends Vue {
     const defaultModel = this._getModelSchemeByConfig();
     Object.keys(this.model).forEach(field => {
       if (Object.prototype.hasOwnProperty.call(defaultModel, field)) {
-        this.$set(this.model, field, defaultModel[field])
+        this.$set(this.model, field, defaultModel[field]);
       } else {
-        this.$delete(this.model, field)
+        this.$delete(this.model, field);
       }
     });
-    this.$nextTick(() => this.clearValidate())
+    this.$nextTick(() => this.clearValidate());
   }
 
   public validateForm(): Promise<boolean> {
@@ -102,7 +109,7 @@ export default class extends Vue {
   }
 
   public setItem(propName: string, value: any): void {
-    this.$set(this.model, propName, value)
+    this.$set(this.model, propName, value);
   }
 
   public getItemRef(propName: string) {
@@ -123,17 +130,19 @@ export default class extends Vue {
 
   public getFormModel(removeNull = true): IFormModel {
     if (removeNull) {
-      const _removeNull = {}
-      const keys = Object.keys(this.model).filter(key => this.model[key] !== null);
-      keys.forEach(key => _removeNull[key] = this.model[key])
-      return _removeNull
+      const _removeNull = {};
+      const keys = Object.keys(this.model).filter(
+        key => this.model[key] !== null
+      );
+      keys.forEach(key => (_removeNull[key] = this.model[key]));
+      return _removeNull;
     } else {
-      return this.model
+      return this.model;
     }
   }
 
   public submit(cb: Function) {
-    cb(this.model)
+    cb(this.model);
   }
 }
 </script>
