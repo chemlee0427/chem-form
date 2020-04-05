@@ -3,8 +3,8 @@
     <h2>{{formData}}</h2>
     <x-form ref="form" :scheme="formConfig" :data.sync="formData">
       <template v-slot:sex="{ model }">
-        <el-radio ref="radio1" v-model="model.sex" label="1">男</el-radio>
-        <el-radio v-model="model.sex" label="2">女</el-radio>
+        <el-radio ref="radio1" v-model="model.sex" label="1">插槽进来的1</el-radio>
+        <el-radio v-model="model.sex" label="2">插槽进来的2</el-radio>
       </template>
       <button @click="submit">search</button>
       <button @click="reset">reset</button>
@@ -62,7 +62,8 @@ export default class App extends Vue {
           labelKey: "label",
           valueKey: "code",
           data: this.simulateHttp
-        }
+        },
+        required: true
       },
       {
         prop: "source",
@@ -85,16 +86,16 @@ export default class App extends Vue {
           data: this.simulateHttp
         }
       },
-      { prop: "sex", label: "性别", default: "1", slot: "sex" }
+      { prop: "sex", label: "性别", default: "1", slot: "sex", required: true }
     ]
   };
 
   handleClick() {
     this.formData = {
       name: "VUE",
-    }
+    };
 
-    console.log((this.$refs.form as any).getFormModel());
+    (this.$refs.form as any).validateForm()
   }
 
 

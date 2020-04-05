@@ -12,9 +12,11 @@
     </template>
     <template v-for="$formItem in MergeScheme.items">
       <template v-if="$formItem.slot">
-        <slot :name="$formItem.slot" :model="model"></slot>
+        <el-form-item :key="$formItem.prop">
+          <slot :name="$formItem.slot" :model="model"></slot>
+        </el-form-item>
       </template>
-      <form-item :ref="$formItem.prop" v-else :key="$formItem.prop" :config="$formItem"></form-item>
+      <x-form-item :ref="$formItem.prop" v-else :key="$formItem.prop" :config="$formItem"></x-form-item>
     </template>
     <slot></slot>
   </el-form>
@@ -22,17 +24,18 @@
 
 <script lang="ts">
 import { Vue, Component, Prop, Provide, Watch } from "vue-property-decorator";
-import { Form } from "element-ui";
+import { Form, FormItem } from "element-ui";
 import { IFormConfig, IFormModel } from "@/typings/form";
 import { defaultFormConfig, defaultComponentConfig } from "./defaultConfig";
-import { isArray } from "@/utils/index";
-import FormItem from "./formItem.vue";
+import { isArray, isFunction } from "@/utils/index";
+import XFormItem from "./formItem.vue";
 
 @Component({
   name: "x-form",
   components: {
     [Form.name]: Form,
-    "form-item": FormItem
+    [FormItem.name]: FormItem,
+    "x-form-item": XFormItem
   }
 })
 export default class extends Vue {
@@ -43,16 +46,38 @@ export default class extends Vue {
 
   model: IFormModel = this._getModelSchemeByConfig();
 
+  // NOTE: 合并配置 - 因可能使用插槽而不用自带组件，需要在此处赋初始值
   protected get MergeScheme(): IFormConfig {
     this.scheme.layout = { ...defaultFormConfig.layout, ...this.scheme.layout };
     this.scheme.attrs = { ...defaultFormConfig.attrs, ...this.scheme.attrs };
+
+    // * 是否渲染，默认自带组件配置
+    this.scheme.items = this.scheme.items.map($item => {
+      const { required, rules, isRender, label } = $item;
+      const targetComponentConfig = defaultComponentConfig[$item["x-component"] || "input"];
+      const _required = required || (isArray(rules) && (rules as []).length) ? true : false;
+      return {
+        ...$item,
+        isRender: isFunction(isRender) ? (isRender as Function)(this.Provider.model) : true,
+        required: _required,
+        rules: rules ? rules : _required
+          ? [{ required: true, message: `${label}为必填项` }]
+          : undefined,
+        "x-component": $item["x-component"] || "input",
+        attrs: { ...targetComponentConfig.attrs, ...$item.attrs }
+      }
+    })
+
+    // * 权限匹配
     if (isArray(this.auth)) {
       this.scheme.items = this.scheme.items.filter(
         $item => (this.auth as string[]).indexOf($item.prop) !== -1
       );
     }
+
     return { ...defaultFormConfig, ...this.scheme };
   }
+  
   // 通过传入配置生成本地数据并赋默认值
   protected _getModelSchemeByConfig(): IFormModel {
     const _model: IFormModel = {};
