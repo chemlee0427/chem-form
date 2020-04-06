@@ -30,7 +30,6 @@
                 :prop="$tableItem.prop"
                 :required="$tableItem.required"
                 :rules="$tableItem.rules"
-                class="x-form-slot"
               >
                 <slot :name="$tableItem.slot" :model="model"></slot>
               </el-form-item>

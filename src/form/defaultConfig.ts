@@ -43,5 +43,27 @@ export const defaultComponentConfig: XComponentConfig = {
   "checkbox": {
     defaultValue: [],
     attrs: {}
+  },
+  "switch": {
+    defaultValue: false,
+    attrs: {}
+  },
+  "slider": {
+    defaultValue: 0,
+    attrs: {
+      step: 20
+    }
+  },
+  "timePicker": {
+    defaultValue: "",
+    attrs: {
+      "value-format": "HH:mm:ss"
+    }
+  },
+  "datePicker": {
+    defaultValue: "",
+    attrs: {
+
+    }
   }
 }

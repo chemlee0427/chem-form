@@ -40,9 +40,6 @@ export default class App extends Vue {
       {
         prop: "age",
         label: "年龄",
-        isRender: (model) => {
-          return model.name === "taro"
-        },
         rules: [{ required: true, message: "请填写此项" }]
       },
       {
@@ -83,7 +80,11 @@ export default class App extends Vue {
           data: this.simulateHttp
         }
       },
-      { prop: "sex", label: "性别", slot: "sex", required: true, isRender: (model) => { return model.name === "taro" } }
+      { prop: "sex", label: "性别", slot: "sex", required: true },
+      { prop: "flag", label: "开关", "x-component": "switch" },
+      { prop: "slider", label: "区间", "x-component": "slider" },
+      { prop: "time_picker", label: "时间", "x-component": "timePicker" },
+      { prop: "date_picker", label: "日期", "x-component": "datePicker" },
     ]
   };
 

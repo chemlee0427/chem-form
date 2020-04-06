@@ -14,15 +14,8 @@
 
 // 定义表格模式下，form的展示形式
 /deep/.x-form-layout-table {
-  .el-radio-group,
-  .el-checkbox-group {
-    padding-left: 15px;
-  }
-
-  // 插槽模式下左边距
-  .x-form-slot .el-form-item__content {
-    padding-left: 15px;
-  }
+  display: flex;
+  flex-wrap: wrap;
 
   .x-form-layout-table_column {
     border: 1px solid #f0f0f0;
@@ -35,6 +28,7 @@
     min-height: 36px;
 
     .el-form-item__label {
+      line-height: 36px;
       min-height: 36px;
       background-color: #fafafa;
       border-right: 1px solid #f0f0f0;
@@ -46,15 +40,25 @@
       min-height: 36px;
       display: flex;
       align-items: center;
+      padding-left: 15px;
+      padding-right: 15px;
     }
 
     .el-form-item__error {
       z-index: 1;
     }
 
-    .el-input,
+    // *****
+    .el-input {
+      height: 100%;
+      width: calc(100% + 30px);
+      margin-left: -15px;
+      margin-right: -15px;
+    }
+
     .el-input-number,
-    .el-select {
+    .el-select,
+    .el-slider {
       height: 100%;
       width: 100%;
     }
