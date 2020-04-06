@@ -106,6 +106,12 @@ export default class App extends Vue {
     }, 2000))
   }
 
+  simulateHttpClone() {
+    return new Promise(resolve => setTimeout(() => {
+      resolve([{ label: "Google", code: "google" }, { label: "Facebook", code: "facebook", disable: true }])
+    }, 5000))
+  }
+
   async submit() {
     (this.$refs.form as any).submit((model) => {
       setTimeout(() => console.log(model), 1000)
