@@ -57,13 +57,19 @@ export const defaultComponentConfig: XComponentConfig = {
   "timePicker": {
     defaultValue: "",
     attrs: {
-      "value-format": "HH:mm:ss"
+      "value-format": "HH:mm:ss",
+      placeholder: "请选择"
     }
   },
   "datePicker": {
     defaultValue: "",
     attrs: {
-
+      "value-format": "yyyy-MM-dd HH:mm:ss",
+      placeholder: "请选择",
     }
+  },
+  "rate": {
+    defaultValue: undefined,
+    attrs: {}
   }
 }

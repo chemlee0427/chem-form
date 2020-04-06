@@ -2,7 +2,7 @@ import { XComponentPlugins } from "@/typings/formItem"
 import Radio from "@/components/Radio.vue"
 import Checkbox from "@/components/Checkbox.vue"
 import Select from "@/components/Select.vue"
-import { Input, InputNumber, Switch, Slider, TimePicker, DatePicker } from "element-ui"
+import { Input, InputNumber, Switch, Slider, TimePicker, DatePicker, Rate} from "element-ui"
 
 const defaultPlugins: XComponentPlugins = {
   "input": Input,
@@ -13,7 +13,8 @@ const defaultPlugins: XComponentPlugins = {
   "switch": Switch,
   "slider": Slider,
   "timePicker": TimePicker,
-  "datePicker": DatePicker
+  "datePicker": DatePicker,
+  'rate': Rate
 }
 
 export default defaultPlugins

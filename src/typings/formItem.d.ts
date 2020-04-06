@@ -29,8 +29,9 @@ export interface IFormItemRule {
   validator?: Function
 }
 
-export type XComponentType = "input" | "number" | "select" | "radio" | "checkbox" | "switch" |
-  "slider" | "timePicker" | "datePicker"
+export type XComponentType =
+  "input" | "number" | "select" | "radio" | "checkbox" | "switch" |
+  "slider" | "timePicker" | "datePicker" | "rate"
 
 export type XComponentPlugins = {
   [P in XComponentType]: any
