@@ -27,7 +27,7 @@ import { Radio } from "element-ui";
 export default class App extends Vue {
   formData: any = {};
   formConfig: IFormConfig = {
-    // DEBUG: true,
+    DEBUG: true,
     attrs: {
       'label-width': "100px",
     },

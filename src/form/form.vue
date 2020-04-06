@@ -9,9 +9,7 @@
     :class="[customClass,{'x-form-onlyRead': MergeScheme.onlyRead}]"
   >
     <!-- 调试模式 -->
-    <template v-if="MergeScheme.DEBUG">
-      <div>{{model}}</div>
-    </template>
+    <debug-table v-if="MergeScheme.DEBUG" :table-source="model"></debug-table>
 
     <!-- 表格模式 -->
     <template v-if="MergeScheme.layout.type === 'table'">
@@ -83,6 +81,7 @@ import { IFormConfig, IFormModel } from "@/typings/form";
 import { defaultFormConfig, defaultComponentConfig } from "./defaultConfig";
 import { isArray, isFunction, deepCopy } from "@/utils/index";
 import XFormItem from "./formItem.vue";
+import DebugTable from "./debug.vue"
 
 @Component({
   name: "x-form",
@@ -91,7 +90,8 @@ import XFormItem from "./formItem.vue";
     [FormItem.name]: FormItem,
     [Row.name]: Row,
     [Col.name]: Col,
-    "x-form-item": XFormItem
+    "x-form-item": XFormItem,
+    "debug-table": DebugTable
   }
 })
 export default class extends Vue {
