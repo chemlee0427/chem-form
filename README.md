@@ -20,7 +20,7 @@ Vue.use(XForm)
 
 // common.vue
 <template>
-  <x-form></x-form>
+  <x-form :data.sync="formData" :scheme="formConfig"></x-form>
 </template>
 
 <script lang="ts">
