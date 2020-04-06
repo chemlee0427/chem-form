@@ -1,12 +1,12 @@
 {
-  "name": "x-form",
+  "name": "chem-form",
   "version": "0.1.0",
-  "private": true,
   "main": "src/form/index.ts",
   "repository": {
     "type": "git",
-    "url": "https://github.com/atomjaylee/x-form"
+    "url": "https://github.com/MiracleWorkers/chem-form"
   },
+  "keywords": ["Vue", "Element", "form"],
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
