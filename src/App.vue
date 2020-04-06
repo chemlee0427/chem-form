@@ -27,25 +27,21 @@ import { Radio } from "element-ui";
 export default class App extends Vue {
   formData: any = {};
   formConfig: IFormConfig = {
-    DEBUG: true,
-    // onlyRead: true,
+    // DEBUG: true,
+    attrs: {
+      'label-width': "100px",
+    },
     items: [
       {
         prop: "name",
         label: "姓名",
-        default: "atom",
         required: true,
-        listeners: {
-          change: (val) => {
-            console.log(val);
-          }
-        }
       },
       {
         prop: "age",
         label: "年龄",
         isRender: (model) => {
-          return model.name === "taro" ? true : false
+          return model.name === "taro"
         },
         rules: [{ required: true, message: "请填写此项" }]
       },
@@ -87,7 +83,7 @@ export default class App extends Vue {
           data: this.simulateHttp
         }
       },
-      { prop: "sex", label: "性别", slot: "sex", required: true }
+      { prop: "sex", label: "性别", slot: "sex", required: true, isRender: (model) => { return model.name === "taro" } }
     ]
   };
 

@@ -4,7 +4,6 @@
     :prop="config.prop"
     :required="config.required"
     :rules="config.rules"
-    v-if="config.isRender"
   >
     <component
       :is="targetComponent"

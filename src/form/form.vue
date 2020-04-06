@@ -5,25 +5,72 @@
     :disabled="MergeScheme.onlyRead"
     v-bind="MergeScheme.attrs"
     @submit.native.prevent
-    :class="[customClass, { 'x-form-onlyRead': MergeScheme.onlyRead}]"
+    :inline="MergeScheme.layout.type === 'inline'"
+    :class="[customClass,{'x-form-onlyRead': MergeScheme.onlyRead}]"
   >
+    <!-- 调试模式 -->
     <template v-if="MergeScheme.DEBUG">
       <div>{{model}}</div>
     </template>
-    <template v-for="$formItem in MergeScheme.items">
-      <template v-if="$formItem.slot">
-        <el-form-item
-          :key="$formItem.prop"
-          :label="$formItem.label"
-          :prop="$formItem.prop"
-          :required="$formItem.required"
-          :rules="$formItem.rules"
-          v-if="$formItem.isRender"
-        >
-          <slot :name="$formItem.slot" :model="model"></slot>
-        </el-form-item>
+
+    <!-- 表格模式 -->
+    <template v-if="MergeScheme.layout.type === 'table'">
+      <el-row class="x-form-layout-table">
+        <template v-for="$tableItem in MergeScheme.items">
+          <el-col
+            class="x-form-layout-table_column"
+            :span="MergeScheme.layout.span"
+            :key="$tableItem.prop"
+            v-if="visible($tableItem.isRender)"
+          >
+            <template v-if="$tableItem.slot">
+              <el-form-item
+                :key="$tableItem.prop"
+                :label="$tableItem.label"
+                :prop="$tableItem.prop"
+                :required="$tableItem.required"
+                :rules="$tableItem.rules"
+              >
+                <slot :name="$tableItem.slot" :model="model"></slot>
+              </el-form-item>
+            </template>
+            <template v-else>
+              <x-form-item
+                v-if="visible($tableItem.isRender)"
+                :ref="$tableItem.prop"
+                :key="$tableItem.prop"
+                :config="$tableItem"
+              ></x-form-item>
+            </template>
+          </el-col>
+        </template>
+      </el-row>
+    </template>
+
+    <!-- 默认模式 -->
+    <template v-else>
+      <template v-for="$formItem in MergeScheme.items">
+        <template v-if="$formItem.slot">
+          <el-form-item
+            :key="$formItem.prop"
+            :label="$formItem.label"
+            :prop="$formItem.prop"
+            :required="$formItem.required"
+            :rules="$formItem.rules"
+            v-if="visible($formItem.isRender)"
+          >
+            <slot :name="$formItem.slot" :model="model"></slot>
+          </el-form-item>
+        </template>
+        <template v-else>
+          <x-form-item
+            v-if="visible($formItem.isRender)"
+            :ref="$formItem.prop"
+            :key="$formItem.prop"
+            :config="$formItem"
+          ></x-form-item>
+        </template>
       </template>
-      <x-form-item :ref="$formItem.prop" v-else :key="$formItem.prop" :config="$formItem"></x-form-item>
     </template>
     <slot></slot>
   </el-form>
@@ -31,7 +78,7 @@
 
 <script lang="ts">
 import { Vue, Component, Prop, Provide, Watch } from "vue-property-decorator";
-import { Form, FormItem } from "element-ui";
+import { Form, FormItem, Row, Col } from "element-ui";
 import { IFormConfig, IFormModel } from "@/typings/form";
 import { defaultFormConfig, defaultComponentConfig } from "./defaultConfig";
 import { isArray, isFunction, deepCopy } from "@/utils/index";
@@ -42,6 +89,8 @@ import XFormItem from "./formItem.vue";
   components: {
     [Form.name]: Form,
     [FormItem.name]: FormItem,
+    [Row.name]: Row,
+    [Col.name]: Col,
     "x-form-item": XFormItem
   }
 })
@@ -54,6 +103,11 @@ export default class extends Vue {
 
   model: IFormModel = this._getModelSchemeByConfig();
 
+  // NOTE: 通过计算属性实时调用配置中的isRender回调
+  get visible() {
+    return isRender => isFunction(isRender) ? isRender(this.model) : true
+  }
+
   // NOTE: 合并配置 - 因可能使用插槽而不用自带组件，需要在此处赋初始值
   protected get MergeScheme(): IFormConfig {
     this.scheme.layout = { ...defaultFormConfig.layout, ...this.scheme.layout };
@@ -61,15 +115,13 @@ export default class extends Vue {
 
     // * 是否渲染，默认自带组件配置
     this.scheme.items = this.scheme.items.map($item => {
-      const { required, rules, isRender, label } = $item;
+      const { required, rules, label } = $item;
       let targetComponentConfig = defaultComponentConfig[$item["x-component"] || "input"];
-
       targetComponentConfig = this.setPlaceholderType(targetComponentConfig, $item.label); // placeholder配置
       const _required = required || (isArray(rules) && (rules as []).length) ? true : false; // 智能设置required和rules关系
       return {
         ...$item,
         required: _required,
-        isRender: isFunction(isRender) ? (isRender as Function)(this.Provider.model) : true,
         attrs: { ...targetComponentConfig.attrs, ...$item.attrs },
         "x-component": $item["x-component"] || "input",
         rules: rules ? rules : _required

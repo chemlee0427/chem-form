@@ -9,8 +9,8 @@ export interface IFormConfig {
 }
 
 export interface IFormLayout {
-  type?: "horizontal" | "vertical" | "inline" | "table"
-  gutter?: number
+  type?: "default" | "inline" | "table"
+  span?: number
 }
 
 export interface IFormModel {

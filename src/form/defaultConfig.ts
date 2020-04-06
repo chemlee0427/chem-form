@@ -4,8 +4,8 @@ import { XComponentConfig } from "@/typings/formItem"
 // NOTE: 默认form的配置
 export const defaultFormConfig: IFormConfig = {
   layout: {
-    type: "inline",
-    gutter: 24,
+    type: "table",
+    span: 8
   },
   attrs: {
     size: "small"
@@ -25,7 +25,7 @@ export const defaultComponentConfig: XComponentConfig = {
   "number": {
     defaultValue: undefined,
     attrs: {
-      "controls-position": "right",
+      controls: false,
       placeholder: "请输入"
     }
   },

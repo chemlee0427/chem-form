@@ -1,6 +1,71 @@
+// 重置input的样式
+/deep/.el-input__inner {
+  border-radius: 2px;
+  text-align: left;
+}
+
+// 重置表单只读模式的样式
 .x-form-onlyRead {
   /deep/.el-input.is-disabled .el-input__inner {
     background-color: #fff;
     cursor: default;
+  }
+}
+
+// 定义表格模式下，form的展示形式
+/deep/.x-form-layout-table {
+  .el-radio-group,
+  .el-checkbox-group {
+    padding-left: 15px;
+  }
+
+  .x-form-layout-table_column {
+    border: 1px solid #f0f0f0;
+    margin-top: -1px;
+    margin-left: -1px;
+  }
+  .el-form-item {
+    margin-bottom: 0;
+    display: flex;
+    min-height: 36px;
+
+    .el-form-item__label {
+      min-height: 36px;
+      background-color: #fafafa;
+      border-right: 1px solid #f0f0f0;
+    }
+    .el-form-item__content {
+      flex: 1;
+      margin-left: 0 !important;
+      border-left: 0;
+      min-height: 36px;
+      display: flex;
+      align-items: center;
+    }
+    
+    .el-form-item__error {
+      z-index: 1;
+    }
+
+    .el-input,
+    .el-input-number,
+    .el-select {
+      height: 100%;
+      width: 100%;
+    }
+
+    .el-input__inner {
+      border-radius: 0;
+      height: 100%;
+      border-color: transparent;
+      &:focus {
+        border-color: #409eff;
+      }
+    }
+  }
+
+  // input校验失败样式
+  .is-error .el-input__inner {
+    border-color: #f56c6c;
   }
 }
