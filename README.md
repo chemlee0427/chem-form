@@ -1,12 +1,12 @@
-# x-form
+# chem-form
 
 > 使用json的方式便捷开发你的form
 
 ## 安装
 ```bash
-npm install x-form
+npm install chem-form
 # or
-yarn add x-form
+yarn add chem-form
 ```
 
 ## 为什么
@@ -15,12 +15,12 @@ Vue.js + Element-ui的组合加快了我们开发中台系统的速度，但是�
 ## 如何使用
 ```js
 // main.js
-import XForm from "x-form"
-Vue.use(XForm)
+import chemForm from "chem-form"
+Vue.use(chemForm)
 
 // common.vue
 <template>
-  <x-form :data.sync="formData" :scheme="formConfig"></x-form>
+  <chem-form :data.sync="formData" :scheme="formConfig"></chem-form>
 </template>
 
 <script lang="ts">
