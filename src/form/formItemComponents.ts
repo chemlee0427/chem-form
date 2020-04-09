@@ -1,10 +1,11 @@
-import { XComponentPlugins } from "@/typings/formItem"
+import { XComponentType } from "@/typings/formItem"
 import Radio from "@/components/Radio.vue"
 import Checkbox from "@/components/Checkbox.vue"
 import Select from "@/components/Select.vue"
-import { Input, InputNumber, Switch, Slider, TimePicker, DatePicker, Rate} from "element-ui"
+import { Component } from "vue"
+import { Input, InputNumber, Switch, Slider, TimePicker, DatePicker, Rate, ColorPicker } from "element-ui"
 
-const defaultPlugins: XComponentPlugins = {
+const defaultPlugins: Record<XComponentType, Component> = {
   "input": Input,
   "number": InputNumber,
   "select": Select,

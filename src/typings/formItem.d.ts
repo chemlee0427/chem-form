@@ -33,10 +33,6 @@ export type XComponentType =
   "input" | "number" | "select" | "radio" | "checkbox" | "switch" |
   "slider" | "timePicker" | "datePicker" | "rate"
 
-export type XComponentPlugins = {
-  [P in XComponentType]: any
-}
-
 export type XComponentConfig = {
   [P in XComponentType]: XComponentItemConfig
 }
