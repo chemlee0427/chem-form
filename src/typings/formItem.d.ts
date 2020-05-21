@@ -39,7 +39,8 @@ export type XComponentType =
   | 'slider'
   | 'timePicker'
   | 'datePicker'
-  | 'rate';
+  | 'rate'
+  | 'colorPicker';
 
 export type XComponentConfig = {
   [P in XComponentType]: XComponentItemConfig;
