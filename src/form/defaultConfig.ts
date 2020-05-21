@@ -1,75 +1,75 @@
-import { IFormConfig } from "@/typings/form"
-import { XComponentConfig } from "@/typings/formItem"
+import { IFormConfig } from '@/typings/form';
+import { XComponentConfig } from '@/typings/formItem';
 
 // NOTE: 默认form的配置
 export const defaultFormConfig: IFormConfig = {
   layout: {
-    type: "table",
+    type: 'table',
     span: 8
   },
   attrs: {
-    size: "small"
+    size: 'small'
   },
   onlyRead: false,
   items: []
-}
+};
 // NOTE: 默认每个自带组件的配置
 export const defaultComponentConfig: XComponentConfig = {
-  "input": {
-    defaultValue: "",
+  input: {
+    defaultValue: '',
     attrs: {
       clearable: true,
-      placeholder: "请输入"
+      placeholder: '请输入'
     }
   },
-  "number": {
+  number: {
     defaultValue: undefined,
     attrs: {
       controls: false,
-      placeholder: "请输入"
+      placeholder: '请输入'
     }
   },
-  "select": {
-    defaultValue: "",
+  select: {
+    defaultValue: '',
     attrs: {
       clearable: true,
-      placeholder: "请选择"
+      placeholder: '请选择'
     }
   },
-  "radio": {
-    defaultValue: "",
+  radio: {
+    defaultValue: '',
     attrs: {}
   },
-  "checkbox": {
+  checkbox: {
     defaultValue: [],
     attrs: {}
   },
-  "switch": {
+  switch: {
     defaultValue: false,
     attrs: {}
   },
-  "slider": {
+  slider: {
     defaultValue: 0,
     attrs: {
       step: 20
     }
   },
-  "timePicker": {
-    defaultValue: "",
+  timePicker: {
+    defaultValue: '',
     attrs: {
-      "value-format": "HH:mm:ss",
-      placeholder: "请选择"
+      'value-format': 'HH:mm:ss',
+      placeholder: '请选择'
     }
   },
-  "datePicker": {
-    defaultValue: "",
+  datePicker: {
+    defaultValue: '',
     attrs: {
-      "value-format": "yyyy-MM-dd HH:mm:ss",
-      placeholder: "请选择",
+      'value-format': 'yyyy-MM-dd HH:mm:ss',
+      placeholder: '请选择'
     }
   },
-  "rate": {
+  rate: {
     defaultValue: undefined,
     attrs: {}
   }
-}
+};

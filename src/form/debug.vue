@@ -2,26 +2,26 @@
   <table>
     <tr>
       <td>字段名</td>
-      <td v-for="prop in propArray" :key="prop">{{prop}}</td>
+      <td v-for="prop in propArray" :key="prop">{{ prop }}</td>
     </tr>
     <tr>
       <td>字段值</td>
-      <td v-for="prop in propArray" :key="prop">{{tableSource[prop]}}</td>
+      <td v-for="prop in propArray" :key="prop">{{ tableSource[prop] }}</td>
     </tr>
   </table>
 </template>
 
 <script lang="ts">
-import { Vue, Component, Prop } from "vue-property-decorator"
+import { Vue, Component, Prop } from 'vue-property-decorator';
 
 @Component({
-  name: "x-form-debug"
+  name: 'x-form-debug'
 })
 export default class extends Vue {
-  @Prop({ type: Object, default: () => ({}) }) tableSource!: Record<string, any>
+  @Prop({ type: Object, default: () => ({}) }) tableSource!: Record<string, any>;
 
   get propArray() {
-    return Object.keys(this.tableSource)
+    return Object.keys(this.tableSource);
   }
 }
 </script>
@@ -51,5 +51,4 @@ tr:nth-child(1) td {
 tr:nth-child(2) td {
   padding: 5px 10px;
 }
-
 </style>

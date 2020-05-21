@@ -1,10 +1,5 @@
 <template>
-  <el-form-item
-    :label="config.label"
-    :prop="config.prop"
-    :required="config.required"
-    :rules="config.rules"
-  >
+  <el-form-item :label="config.label" :prop="config.prop" :required="config.required" :rules="config.rules">
     <component
       :is="targetComponent"
       v-model="Provider.model[config.prop]"
@@ -16,13 +11,13 @@
 </template>
 
 <script lang="ts">
-import { Vue, Component, Prop, Inject } from "vue-property-decorator";
-import { FormItem } from "element-ui";
-import { IFormItemConfig } from "@/typings/formItem";
-import defaultComponents from "./formItemComponents";
+import { Vue, Component, Prop, Inject } from 'vue-property-decorator';
+import { FormItem } from 'element-ui';
+import { IFormItemConfig } from '@/typings/formItem';
+import defaultComponents from './formItemComponents';
 
 @Component({
-  name: "x-form-item",
+  name: 'x-form-item',
   components: {
     [FormItem.name]: FormItem
   }
@@ -32,7 +27,7 @@ export default class extends Vue {
   @Inject() Provider!: any;
 
   get targetComponent() {
-    return defaultComponents[this.config["x-component"] as string];
+    return defaultComponents[this.config['x-component'] as string];
   }
 }
 </script>

@@ -1,22 +1,22 @@
-import { IFormItemConfig } from "./formItem"
+import { IFormItemConfig } from './formItem';
 
 export interface IFormConfig {
-  DEBUG?: boolean
-  layout?: IFormLayout
-  attrs?: any
-  onlyRead?: boolean
-  items: IFormItemConfig[]
+  DEBUG?: boolean;
+  layout?: IFormLayout;
+  attrs?: any;
+  onlyRead?: boolean;
+  items: IFormItemConfig[];
 }
 
 export interface IFormLayout {
-  type?: "default" | "inline" | "table"
-  span?: number
+  type?: 'default' | 'inline' | 'table';
+  span?: number;
 }
 
 export interface IFormModel {
-  [propName: string]: any
+  [propName: string]: any;
 }
 
 export interface InstallOptions {
-  name?: string
+  name?: string;
 }

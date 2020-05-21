@@ -5,21 +5,22 @@
       :key="$option.value"
       :label="$option.value"
       :disabled="$option.disable"
-    >{{$option.label}}</el-checkbox>
+      >{{ $option.label }}</el-checkbox
+    >
   </el-checkbox-group>
 </template>
 
 <script lang="ts">
-import { Component, Mixins } from "vue-property-decorator";
-import { Checkbox, CheckboxGroup } from "element-ui"
-import sourceMixin from "./Mixin"
+import { Component, Mixins } from 'vue-property-decorator';
+import { Checkbox, CheckboxGroup } from 'element-ui';
+import sourceMixin from './Mixin';
 
 @Component({
-  name: "x-form-checkbox",
+  name: 'x-form-checkbox',
   components: {
     [CheckboxGroup.name]: CheckboxGroup,
     [Checkbox.name]: Checkbox
   }
 })
-export default class extends Mixins(sourceMixin) { }
+export default class extends Mixins(sourceMixin) {}
 </script>

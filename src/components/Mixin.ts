@@ -1,18 +1,18 @@
-import { Vue, Component, Prop, Watch } from "vue-property-decorator"
-import { IFormItemSource } from "@/typings/formItem"
-import { isFunction, isArray } from "@/utils/index"
+import { Vue, Component, Prop, Watch } from 'vue-property-decorator';
+import { IFormItemSource } from '@/typings/formItem';
+import { isFunction, isArray } from '@/utils/index';
 
 @Component
 export default class extends Vue {
-  @Prop() value!: any
-  @Prop({ type: Object }) source!: IFormItemSource
+  @Prop() value!: any;
+  @Prop({ type: Object }) source!: IFormItemSource;
 
-  localValue = this.value
-  localSource: any[] = []
+  localValue = this.value;
+  localSource: any[] = [];
 
-  @Watch("localValue", { immediate: true, deep: true })
+  @Watch('localValue', { immediate: true, deep: true })
   emitUpdate(newValue: any) {
-    this.$emit("input", newValue)
+    this.$emit('input', newValue);
   }
 
   async created() {
@@ -21,7 +21,7 @@ export default class extends Vue {
     if (isArray(data)) {
       _localSource = data as [];
     } else if (isFunction(data)) {
-      _localSource = await (data as Function)() || [];
+      _localSource = (await (data as Function)()) || [];
     }
 
     this.localSource = _localSource.map(item => ({
@@ -29,6 +29,6 @@ export default class extends Vue {
       value: item[valueKey],
       // NODE: 用于控制每个选项的禁用
       disable: item.disable || false
-    }))
+    }));
   }
 }
