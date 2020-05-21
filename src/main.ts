@@ -1,11 +1,11 @@
-import Vue from 'vue'
-import App from './App.vue'
+import Vue from 'vue';
+import App from './App.vue';
 
-Vue.config.productionTip = false
-import WFrom from "@/form/index"
+Vue.config.productionTip = false;
+import WFrom from '@/form/index';
 
-Vue.use(WFrom)
+Vue.use(WFrom);
 
 new Vue({
-  render: h => h(App),
-}).$mount('#app')
+  render: h => h(App)
+}).$mount('#app');
