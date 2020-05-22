@@ -92,8 +92,7 @@ export default class App extends Vue {
       { prop: 'time_picker', label: '时间', 'x-component': 'timePicker' },
       { prop: 'date_picker', label: '日期', 'x-component': 'datePicker' },
       { prop: 'date_range', label: '日期区间', 'x-component': 'datePicker', attrs: { type: 'daterange' } },
-      { prop: 'rate', label: '评分', 'x-component': 'rate' },
-      { prop: 'color', label: '颜色选择', 'x-component': 'colorPicker' }
+      { prop: 'rate', label: '评分', 'x-component': 'rate' }
     ]
   };
 

@@ -72,9 +72,5 @@ export const defaultComponentConfig: XComponentConfig = {
   rate: {
     defaultValue: undefined,
     attrs: {}
-  },
-  colorPicker: {
-    defaultValue: '',
-    attrs: {}
   }
 };
