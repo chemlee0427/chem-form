@@ -24,7 +24,7 @@ import defaultComponents from './formItemComponents';
 })
 export default class extends Vue {
   @Prop({ type: Object, required: true }) config!: IFormItemConfig;
-  @Inject() Provider!: any;
+  @Inject() Provider!: Record<string, any>;
 
   get targetComponent() {
     return defaultComponents[this.config['x-component'] as string];

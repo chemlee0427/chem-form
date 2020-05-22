@@ -10,9 +10,15 @@ export default class extends Vue {
   localValue = this.value;
   localSource: any[] = [];
 
+  @Watch('value', { deep: true })
+  listenValue(newValue) {
+    this.localValue = newValue;
+  }
+
   @Watch('localValue', { immediate: true, deep: true })
   emitUpdate(newValue: any) {
     this.$emit('input', newValue);
+    this.$emit('update:value', newValue);
   }
 
   async created() {

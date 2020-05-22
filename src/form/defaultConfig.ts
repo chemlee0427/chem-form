@@ -13,6 +13,7 @@ export const defaultFormConfig: IFormConfig = {
   onlyRead: false,
   items: []
 };
+
 // NOTE: 默认每个自带组件的配置
 export const defaultComponentConfig: XComponentConfig = {
   input: {

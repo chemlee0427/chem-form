@@ -15,7 +15,7 @@
 import { Vue, Component, Prop } from 'vue-property-decorator';
 
 @Component({
-  name: 'x-form-debug'
+  name: 'chem-form-debug'
 })
 export default class extends Vue {
   @Prop({ type: Object, default: () => ({}) }) tableSource!: Record<string, any>;

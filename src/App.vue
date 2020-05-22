@@ -1,14 +1,14 @@
 <template>
   <div id="app">
-    <h2>{{ formData }}</h2>
-    <x-form ref="form" :scheme="formConfig" :data.sync="formData" custom-class="fpx">
+    <debug-table :table-source="formData"></debug-table>
+    <chem-form ref="form" :scheme="formConfig" :data.sync="formData" custom-class="fpx">
       <template v-slot:sex="{ model }">
         <el-radio ref="radio1" v-model="model.sex" label="1">插槽进来的1</el-radio>
         <el-radio v-model="model.sex" label="2">插槽进来的2</el-radio>
       </template>
       <button @click="submit">search</button>
       <button @click="reset">reset</button>
-    </x-form>
+    </chem-form>
     <button @click="handleClick">点击修改</button>
   </div>
 </template>
@@ -17,11 +17,13 @@
 import { Component, Vue } from 'vue-property-decorator';
 import { IFormConfig } from '@/typings/form';
 import { Radio } from 'element-ui';
+import Debug from './form/debug.vue';
 
 @Component({
   name: 'app',
   components: {
-    [Radio.name]: Radio
+    [Radio.name]: Radio,
+    'debug-table': Debug
   }
 })
 export default class App extends Vue {
@@ -86,18 +88,19 @@ export default class App extends Vue {
       { prop: 'time_picker', label: '时间', 'x-component': 'timePicker' },
       { prop: 'date_picker', label: '日期', 'x-component': 'datePicker' },
       { prop: 'date_range', label: '日期区间', 'x-component': 'datePicker', attrs: { type: 'daterange' } },
-      { prop: 'rate', label: '评分', 'x-component': 'rate' }
+      { prop: 'rate', label: '评分', 'x-component': 'rate' },
+      { prop: 'color', label: '颜色选择', 'x-component': 'colorPicker' }
     ]
   };
 
+  // 点击设置
   handleClick() {
     this.formData = {
       name: 'VUE'
     };
-
-    (this.$refs.form as any).validateForm();
   }
 
+  // 重置
   reset() {
     (this.$refs.form as any).resetForm();
   }
@@ -109,7 +112,7 @@ export default class App extends Vue {
           { label: 'Vue', code: 'vue' },
           { label: 'React', code: 'react', disable: true }
         ]);
-      }, 2000)
+      }, 1000)
     );
   }
 

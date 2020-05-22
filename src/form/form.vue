@@ -172,9 +172,11 @@ export default class extends Vue {
   // * We need to set the non-entered field to the default value of the field.
   @Watch('data', { deep: true })
   updateModel(newData: IFormModel) {
-    const _mergeModel = { ...this.model, ...newData };
-    Object.keys(_mergeModel).forEach(field => {
-      this.$set(this.model, field, _mergeModel[field]);
+    const defaultModel = this._getModelSchemeByConfig();
+    Object.keys(this.model).forEach(field => {
+      const has: boolean = Object.prototype.hasOwnProperty.call(newData, field);
+      if (has) this.$set(this.model, field, newData[field]);
+      else this.$set(this.model, field, defaultModel[field]);
     });
   }
 

@@ -4,7 +4,7 @@ import { InstallOptions } from '@/typings/form';
 
 const FormPlugin = {
   install(Vue: VueConstructor, options: InstallOptions = {}) {
-    const componentName = options.name || 'x-form';
+    const componentName = options.name || 'chem-form';
     Vue.component(componentName, Form);
   }
 };
