@@ -2,9 +2,9 @@ import Vue from 'vue';
 import App from './App.vue';
 
 Vue.config.productionTip = false;
-import WFrom from '@/form/index';
+import ChemFrom from '@/form/index';
 
-Vue.use(WFrom);
+Vue.use(ChemFrom);
 
 new Vue({
   render: h => h(App)
