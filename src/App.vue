@@ -9,7 +9,6 @@
       <button @click="submit">search</button>
       <button @click="reset">reset</button>
     </chem-form>
-    <el-color-picker v-model="color"></el-color-picker>
     <button @click="handleClick">点击修改</button>
   </div>
 </template>
@@ -18,19 +17,16 @@
 import { Component, Vue } from 'vue-property-decorator';
 import { IFormConfig } from '@/typings/form';
 import { Radio } from 'element-ui';
-import { ColorPicker } from 'element-ui';
 import Debug from './form/debug.vue';
 
 @Component({
   name: 'app',
   components: {
     [Radio.name]: Radio,
-    [ColorPicker.name]: ColorPicker,
     'debug-table': Debug
   }
 })
 export default class App extends Vue {
-  color = '';
   formData: any = {};
   formConfig: IFormConfig = {
     DEBUG: true,
