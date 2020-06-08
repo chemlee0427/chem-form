@@ -52,11 +52,5 @@ export default class extends Vue {
     const instance = this.$createElement('span').constructor;
     return target instanceof instance;
   }
-
-  mounted() {
-    if (this.config.description) {
-      console.log(this.config);
-    }
-  }
 }
 </script>
