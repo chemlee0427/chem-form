@@ -17,7 +17,7 @@
 import { Component, Vue } from 'vue-property-decorator';
 import { IFormConfig } from '@/typings/form';
 import { Radio } from 'element-ui';
-import Debug from './form/debug.vue';
+import Debug from '../src/form/debug.vue';
 
 @Component({
   name: 'app',
