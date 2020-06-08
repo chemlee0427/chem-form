@@ -84,7 +84,7 @@ import XFormItem from './formItem.vue';
 import DebugTable from './debug.vue';
 
 @Component({
-  name: 'x-form',
+  name: 'chem-form',
   components: {
     [Form.name]: Form,
     [FormItem.name]: FormItem,

@@ -27,6 +27,7 @@ import Debug from '../src/form/debug.vue';
   }
 })
 export default class App extends Vue {
+  h: Function = this.$createElement;
   formData: any = {};
   formConfig: IFormConfig = {
     DEBUG: true,
@@ -42,6 +43,7 @@ export default class App extends Vue {
       {
         prop: 'age',
         label: '年龄',
+        description: this.h('div', 12123),
         rules: [{ required: true, message: '请填写此项' }]
       },
       {
