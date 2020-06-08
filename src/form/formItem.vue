@@ -7,6 +7,7 @@
       v-on="config.listeners"
       :source="config.source"
     ></component>
+    <!-- 自定义label + 添加描述信息 -->
     <template #label>
       <span> {{ config.label }}</span>
       <el-popover placement="bottom" trigger="hover" v-if="config.description">
