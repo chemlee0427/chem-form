@@ -1,6 +1,8 @@
 <template>
   <el-form-item :prop="config.prop" :required="config.required" :rules="config.rules">
+    <jsx-component :vnode="$slots.default" v-if="config.slot"></jsx-component>
     <component
+      v-else
       :is="targetComponent"
       v-model="Provider.model[config.prop]"
       v-bind="config.attrs"
@@ -49,6 +51,12 @@ export default class extends Vue {
   isVNode(target) {
     const instance = this.$createElement('span').constructor;
     return target instanceof instance;
+  }
+
+  mounted() {
+    if (this.config.description) {
+      console.log(this.config);
+    }
   }
 }
 </script>

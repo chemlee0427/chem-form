@@ -2,12 +2,13 @@
   <div id="app">
     <debug-table :table-source="formData"></debug-table>
     <chem-form ref="form" :scheme="formConfig" :data.sync="formData" custom-class="fpx">
-      <template v-slot:sex="{ model }">
+      <template #sex="{ model }">
         <el-radio ref="radio1" v-model="model.sex" label="1">插槽进来的1</el-radio>
         <el-radio v-model="model.sex" label="2">插槽进来的2</el-radio>
       </template>
       <button @click="submit">search</button>
       <button @click="reset">reset</button>
+      <button @click="validate">validate</button>
     </chem-form>
     <button @click="handleClick">点击修改</button>
   </div>
@@ -43,7 +44,6 @@ export default class App extends Vue {
       {
         prop: 'age',
         label: '年龄',
-        description: this.h('div', 12123),
         rules: [{ required: true, message: '请填写此项' }]
       },
       {
@@ -126,6 +126,10 @@ export default class App extends Vue {
         ]);
       }, 5000)
     );
+  }
+
+  async validate() {
+    const flag = await (this.$refs.form as any).validateForm();
   }
 
   async submit() {

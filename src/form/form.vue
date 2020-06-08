@@ -21,25 +21,14 @@
             :key="$tableItem.prop"
             v-if="visible($tableItem.isRender)"
           >
-            <template v-if="$tableItem.slot">
-              <el-form-item
-                :key="$tableItem.prop"
-                :label="$tableItem.label"
-                :prop="$tableItem.prop"
-                :required="$tableItem.required"
-                :rules="$tableItem.rules"
-              >
-                <slot :name="$tableItem.slot" :model="model"></slot>
-              </el-form-item>
-            </template>
-            <template v-else>
-              <x-form-item
-                v-if="visible($tableItem.isRender)"
-                :ref="$tableItem.prop"
-                :key="$tableItem.prop"
-                :config="$tableItem"
-              ></x-form-item>
-            </template>
+            <x-form-item
+              v-if="visible($tableItem.isRender)"
+              :ref="$tableItem.prop"
+              :key="$tableItem.prop"
+              :config="$tableItem"
+            >
+              <slot :name="$tableItem.slot" :model="model" v-if="$tableItem.slot"></slot>
+            </x-form-item>
           </el-col>
         </template>
       </el-row>
@@ -48,26 +37,9 @@
     <!-- 默认模式 -->
     <template v-else>
       <template v-for="$formItem in MergeScheme.items">
-        <template v-if="$formItem.slot">
-          <el-form-item
-            :key="$formItem.prop"
-            :label="$formItem.label"
-            :prop="$formItem.prop"
-            :required="$formItem.required"
-            :rules="$formItem.rules"
-            v-if="visible($formItem.isRender)"
-          >
-            <slot :name="$formItem.slot" :model="model"></slot>
-          </el-form-item>
-        </template>
-        <template v-else>
-          <x-form-item
-            v-if="visible($formItem.isRender)"
-            :ref="$formItem.prop"
-            :key="$formItem.prop"
-            :config="$formItem"
-          ></x-form-item>
-        </template>
+        <x-form-item v-if="visible($formItem.isRender)" :ref="$formItem.prop" :key="$formItem.prop" :config="$formItem">
+          <slot :name="$formItem.slot" :model="model" v-if="$formItem.slot"></slot>
+        </x-form-item>
       </template>
     </template>
     <slot></slot>
