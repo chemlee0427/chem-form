@@ -18,6 +18,7 @@ export const defaultFormConfig: IFormConfig = {
 export const defaultComponentConfig: XComponentConfig = {
   input: {
     defaultValue: '',
+    supportEntry: true,
     attrs: {
       clearable: true,
       placeholder: '请输入'
@@ -25,6 +26,7 @@ export const defaultComponentConfig: XComponentConfig = {
   },
   number: {
     defaultValue: undefined,
+    supportEntry: true,
     attrs: {
       controls: false,
       placeholder: '请输入'
@@ -32,6 +34,7 @@ export const defaultComponentConfig: XComponentConfig = {
   },
   select: {
     defaultValue: '',
+    supportEntry: true,
     attrs: {
       clearable: true,
       placeholder: '请选择'
@@ -57,6 +60,7 @@ export const defaultComponentConfig: XComponentConfig = {
   },
   timePicker: {
     defaultValue: '',
+    supportEntry: true,
     attrs: {
       'value-format': 'HH:mm:ss',
       placeholder: '请选择'
@@ -64,6 +68,7 @@ export const defaultComponentConfig: XComponentConfig = {
   },
   datePicker: {
     defaultValue: '',
+    supportEntry: true,
     attrs: {
       'value-format': 'yyyy-MM-dd HH:mm:ss',
       placeholder: '请选择'

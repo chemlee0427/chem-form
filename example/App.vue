@@ -65,7 +65,7 @@ export default class App extends Vue {
         prop: 'source',
         label: '来源',
         'x-component': 'select',
-        default: 'vue',
+        defaultValue: 'vue',
         source: {
           labelKey: 'label',
           valueKey: 'code',

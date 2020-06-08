@@ -153,7 +153,7 @@ export default class extends Vue {
     const _model: IFormModel = {};
     this.scheme.items.forEach(formItemConfig => {
       const targetComponentConfig = defaultComponentConfig[formItemConfig['x-component'] || 'input'];
-      _model[formItemConfig.prop] = formItemConfig.default || targetComponentConfig.defaultValue;
+      _model[formItemConfig.prop] = formItemConfig.defaultValue || targetComponentConfig.defaultValue;
     });
     return _model;
   }

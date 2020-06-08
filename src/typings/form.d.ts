@@ -1,10 +1,10 @@
 import { IFormItemConfig } from './formItem';
 
 export interface IFormConfig {
-  DEBUG?: boolean;
-  layout?: IFormLayout;
-  attrs?: any;
-  onlyRead?: boolean;
+  DEBUG?: boolean; // 是否显示DEBUG信息
+  layout?: IFormLayout; // form展示的方式
+  attrs?: any; // 扩展属性 - element-ui上自带的
+  onlyRead?: boolean; // 只读模式
   items: IFormItemConfig[];
 }
 
