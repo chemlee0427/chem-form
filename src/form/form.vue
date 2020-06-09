@@ -26,6 +26,7 @@
               :ref="$tableItem.prop"
               :key="$tableItem.prop"
               :config="$tableItem"
+              @entryEvent="handleEntryEvent"
             >
               <slot :name="$tableItem.slot" :model="model" v-if="$tableItem.slot"></slot>
             </x-form-item>
@@ -76,7 +77,7 @@ export default class extends Vue {
   model: IFormModel = this._getModelSchemeByConfig();
 
   // NOTE: 通过计算属性实时调用配置中的isRender回调
-  get visible() {
+  protected get visible() {
     return isRender => (isFunction(isRender) ? isRender(this.model) : true);
   }
 
@@ -96,7 +97,13 @@ export default class extends Vue {
         required: _required,
         attrs: { ...targetComponentConfig.attrs, ...$item.attrs },
         'x-component': $item['x-component'] || 'input',
-        rules: rules ? rules : _required ? [{ required: true, message: `${label}为必填项` }] : undefined
+        rules: rules ? rules : _required ? [{ required: true, message: `${label}为必填项` }] : undefined,
+        supportEntry:
+          $item.supportEntry === undefined
+            ? $item.slot
+              ? false
+              : targetComponentConfig.supportEntry
+            : $item.supportEntry
       };
     });
 
@@ -132,6 +139,23 @@ export default class extends Vue {
 
   protected getRef(refName: string): any {
     return this.$refs[refName];
+  }
+
+  protected get supportEntryList() {
+    return this.MergeScheme.items.filter(item => item.supportEntry);
+  }
+
+  protected handleEntryEvent(activeProp: string) {
+    const _currentIndex = this.supportEntryList.findIndex(config => config.prop === activeProp);
+    (document.activeElement as HTMLElement).blur();
+    if (_currentIndex === -1 || this.supportEntryList.length - 1 === _currentIndex) return;
+    const nextProp: string = this.supportEntryList[_currentIndex + 1].prop;
+    const nextRef = this.$refs[nextProp][0];
+    const targetInput = nextRef.$el.querySelector('input');
+    if (targetInput) {
+      targetInput.focus();
+      targetInput.select();
+    }
   }
 
   @Watch('model', { immediate: true, deep: true })

@@ -3,6 +3,8 @@
     <jsx-component :vnode="$slots.default" v-if="config.slot"></jsx-component>
     <component
       v-else
+      ref="formItem"
+      @blur="_blur"
       :is="targetComponent"
       v-model="Provider.model[config.prop]"
       v-bind="config.attrs"
@@ -51,6 +53,26 @@ export default class extends Vue {
   isVNode(target) {
     const instance = this.$createElement('span').constructor;
     return target instanceof instance;
+  }
+
+  addMarkData() {
+    if (this.config.supportEntry) {
+      const targetInputElement = this.$el.querySelector('input');
+      (targetInputElement as HTMLElement).setAttribute('data-prop', this.config.prop);
+      (targetInputElement as HTMLElement).addEventListener('keydown', evt => {
+        if (evt.keyCode === 13) this.$emit('entryEvent', this.config.prop);
+      });
+    }
+  }
+
+  _blur() {
+    const ref: any = this.$refs.formItem;
+    console.log(ref.blur);
+    if (ref && ref.blur) setTimeout(() => ref.blur(), 2000);
+  }
+
+  mounted() {
+    this.addMarkData();
   }
 }
 </script>

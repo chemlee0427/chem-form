@@ -6,10 +6,10 @@
         <el-radio ref="radio1" v-model="model.sex" label="1">插槽进来的1</el-radio>
         <el-radio v-model="model.sex" label="2">插槽进来的2</el-radio>
       </template>
-      <button @click="submit">search</button>
-      <button @click="reset">reset</button>
-      <button @click="validate">validate</button>
     </chem-form>
+    <button @click="submit">search</button>
+    <button @click="reset">reset</button>
+    <button @click="validate">validate</button>
     <button @click="handleClick">点击修改</button>
   </div>
 </template>
@@ -90,7 +90,8 @@ export default class App extends Vue {
       { prop: 'time_picker', label: '时间', 'x-component': 'timePicker' },
       { prop: 'date_picker', label: '日期', 'x-component': 'datePicker' },
       { prop: 'date_range', label: '日期区间', 'x-component': 'datePicker', attrs: { type: 'daterange' } },
-      { prop: 'rate', label: '评分', 'x-component': 'rate' }
+      { prop: 'rate', label: '评分', 'x-component': 'rate' },
+      { prop: 'date_range2', label: '日期区间2', 'x-component': 'datePicker', attrs: { type: 'daterange' } }
     ]
   };
 
@@ -129,7 +130,7 @@ export default class App extends Vue {
   }
 
   async validate() {
-    const flag = await (this.$refs.form as any).validateForm();
+    await (this.$refs.form as any).validateForm();
   }
 
   async submit() {
