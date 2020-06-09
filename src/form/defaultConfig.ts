@@ -37,7 +37,8 @@ export const defaultComponentConfig: XComponentConfig = {
     supportEntry: true,
     attrs: {
       clearable: true,
-      placeholder: '请选择'
+      placeholder: '请选择',
+      'automatic-dropdown': true
     }
   },
   radio: {
@@ -60,7 +61,6 @@ export const defaultComponentConfig: XComponentConfig = {
   },
   timePicker: {
     defaultValue: '',
-    supportEntry: true,
     attrs: {
       'value-format': 'HH:mm:ss',
       placeholder: '请选择'
@@ -68,7 +68,6 @@ export const defaultComponentConfig: XComponentConfig = {
   },
   datePicker: {
     defaultValue: '',
-    supportEntry: true,
     attrs: {
       'value-format': 'yyyy-MM-dd HH:mm:ss',
       placeholder: '请选择'

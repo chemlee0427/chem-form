@@ -27,6 +27,7 @@
               :key="$tableItem.prop"
               :config="$tableItem"
               @entryEvent="handleEntryEvent"
+              @focus="handleItemFocus"
             >
               <slot :name="$tableItem.slot" :model="model" v-if="$tableItem.slot"></slot>
             </x-form-item>
@@ -147,7 +148,6 @@ export default class extends Vue {
 
   protected handleEntryEvent(activeProp: string) {
     const _currentIndex = this.supportEntryList.findIndex(config => config.prop === activeProp);
-    (document.activeElement as HTMLElement).blur();
     if (_currentIndex === -1 || this.supportEntryList.length - 1 === _currentIndex) return;
     const nextProp: string = this.supportEntryList[_currentIndex + 1].prop;
     const nextRef = this.$refs[nextProp][0];
@@ -156,6 +156,22 @@ export default class extends Vue {
       targetInput.focus();
       targetInput.select();
     }
+  }
+
+  handleItemFocus(propName: string) {
+    const _currentIndex = this.supportEntryList.findIndex(config => config.prop === propName);
+    if (_currentIndex === -1 || _currentIndex === 0) return;
+    const preProp = this.supportEntryList[_currentIndex - 1].prop;
+    const targetComponent = this.findTargetBlurComponent(this.$refs[preProp] as Vue[]);
+    setTimeout(() => targetComponent.blur(), 200);
+  }
+
+  findTargetBlurComponent(components: Vue[]) {
+    const targetComponent = components.find(item => isFunction((item as any).blur));
+    if (targetComponent) return targetComponent;
+    let mergeChilds: Vue[] = [];
+    components.forEach(item => (item.$children ? (mergeChilds = [...mergeChilds, ...item.$children]) : null));
+    return this.findTargetBlurComponent(mergeChilds);
   }
 
   @Watch('model', { immediate: true, deep: true })
