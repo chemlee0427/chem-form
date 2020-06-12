@@ -9,7 +9,7 @@
 <script lang="ts">
 import { Component, Mixins } from 'vue-property-decorator';
 import { RadioGroup, Radio } from 'element-ui';
-import sourceMixin from './Mixin';
+import sourceMixin from './SourceMixin';
 
 @Component({
   name: 'x-form-radio',

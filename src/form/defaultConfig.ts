@@ -76,5 +76,9 @@ export const defaultComponentConfig: XComponentConfig = {
   rate: {
     defaultValue: undefined,
     attrs: {}
+  },
+  upload: {
+    defaultValue: '',
+    attrs: {}
   }
 };

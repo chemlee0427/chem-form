@@ -1,9 +1,11 @@
-import { XComponentType } from '@/typings/formItem';
-import Radio from '@/components/Radio.vue';
-import Checkbox from '@/components/Checkbox.vue';
-import Select from '@/components/Select.vue';
 import { Component } from 'vue';
 import { Input, InputNumber, Switch, Slider, TimePicker, DatePicker, Rate } from 'element-ui';
+import { XComponentType } from '@/typings/formItem';
+
+import Radio from '@/components/BaseRadio.vue';
+import Checkbox from '@/components/BaseCheckbox.vue';
+import Select from '@/components/BaseSelect.vue';
+import Upload from '@/components/BaseUpload.vue';
 
 const defaultPlugins: Record<XComponentType, Component> = {
   input: Input,
@@ -15,7 +17,8 @@ const defaultPlugins: Record<XComponentType, Component> = {
   slider: Slider,
   timePicker: TimePicker,
   datePicker: DatePicker,
-  rate: Rate
+  rate: Rate,
+  upload: Upload
 };
 
 export default defaultPlugins;

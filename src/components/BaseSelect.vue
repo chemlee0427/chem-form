@@ -13,7 +13,7 @@
 <script lang="ts">
 import { Component, Mixins } from 'vue-property-decorator';
 import { Select, Option } from 'element-ui';
-import sourceMixin from './Mixin';
+import sourceMixin from './SourceMixin';
 
 @Component({
   name: 'x-form-select',

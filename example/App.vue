@@ -33,7 +33,7 @@ export default class App extends Vue {
   formConfig: IFormConfig = {
     DEBUG: true,
     attrs: {
-      'label-width': '100px'
+      'label-width': '120px'
     },
     items: [
       {
@@ -91,7 +91,7 @@ export default class App extends Vue {
       { prop: 'date_picker', label: '日期', 'x-component': 'datePicker' },
       { prop: 'date_range', label: '日期区间', 'x-component': 'datePicker', attrs: { type: 'daterange' } },
       { prop: 'rate', label: '评分', 'x-component': 'rate' },
-      { prop: 'date_range2', label: '日期区间2', 'x-component': 'datePicker', attrs: { type: 'daterange' } }
+      { prop: 'upload', label: '图片上传', 'x-component': 'upload', colSpan: 24 }
     ]
   };
 

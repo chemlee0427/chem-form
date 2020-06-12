@@ -7,6 +7,7 @@ interface baseConfig {
   required?: boolean;
   rules?: IFormItemRule[];
   description?: string | VNode;
+  colSpan?: number;
   supportEntry?: boolean;
   slot?: string;
   'x-component'?: XComponentType;
@@ -45,7 +46,8 @@ export type XComponentType =
   | 'slider'
   | 'timePicker'
   | 'datePicker'
-  | 'rate';
+  | 'rate'
+  | 'upload';
 
 export type XComponentConfig = {
   [P in XComponentType]: XComponentItemConfig;

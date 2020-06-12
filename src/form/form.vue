@@ -17,7 +17,7 @@
         <template v-for="$tableItem in MergeScheme.items">
           <el-col
             class="x-form-layout-table_column"
-            :span="MergeScheme.layout.span"
+            :span="$tableItem.colSpan"
             :key="$tableItem.prop"
             v-if="visible($tableItem.isRender)"
           >
@@ -98,6 +98,7 @@ export default class extends Vue {
         required: _required,
         attrs: { ...targetComponentConfig.attrs, ...$item.attrs },
         'x-component': $item['x-component'] || 'input',
+        colSpan: $item.colSpan ? $item.colSpan : (defaultFormConfig.layout as Record<string, any>).span,
         rules: rules ? rules : _required ? [{ required: true, message: `${label}为必填项` }] : undefined,
         supportEntry:
           $item.supportEntry === undefined

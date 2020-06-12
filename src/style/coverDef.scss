@@ -23,27 +23,32 @@
     margin-top: -1px;
     margin-left: -1px;
   }
+
+  $defaultItemHeight: 36px;
   .el-form-item {
     margin-bottom: 0;
     display: flex;
-    height: 36px;
+    min-height: $defaultItemHeight;
 
     .el-form-item__label {
-      line-height: 36px;
-      height: 36px;
+      display: flex;
       background-color: #fafafa;
       border-right: 1px solid #f0f0f0;
       flex-shrink: 0;
+      align-items: center;
+      justify-content: flex-end;
     }
     .el-form-item__content {
       flex: 1;
       margin-left: 0 !important;
       border-left: 0;
-      height: 36px;
       display: flex;
       align-items: center;
       padding-left: 15px;
       padding-right: 15px;
+      line-height: initial;
+      flex-wrap: wrap;
+      overflow: hidden;
     }
 
     .el-form-item__error {
@@ -64,11 +69,13 @@
       margin-right: -15px;
     }
 
+    // 特定组件处理
     .el-input-number,
     .el-select,
     .el-slider {
       height: 100%;
       width: 100%;
+      max-height: $defaultItemHeight;
     }
 
     .el-input__inner {
