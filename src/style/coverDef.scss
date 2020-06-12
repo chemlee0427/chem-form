@@ -61,7 +61,6 @@
       pointer-events: none;
     }
 
-    // *****
     .el-input {
       height: 100%;
       width: calc(100% + 30px);
@@ -76,6 +75,19 @@
       height: 100%;
       width: 100%;
       max-height: $defaultItemHeight;
+    }
+
+    // 上传组件
+    .el-upload--picture-card,
+    .el-upload-list__item {
+      margin: 8px 4px;
+      width: 80px;
+      height: 80px;
+      border-radius: 2px;
+      line-height: 84px;
+      &:first-child {
+        margin-left: 0;
+      }
     }
 
     .el-input__inner {

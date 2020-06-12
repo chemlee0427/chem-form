@@ -35,6 +35,7 @@ export default class App extends Vue {
     attrs: {
       'label-width': '120px'
     },
+    layout: { type: 'table' },
     items: [
       {
         prop: 'name',
@@ -91,14 +92,24 @@ export default class App extends Vue {
       { prop: 'date_picker', label: '日期', 'x-component': 'datePicker' },
       { prop: 'date_range', label: '日期区间', 'x-component': 'datePicker', attrs: { type: 'daterange' } },
       { prop: 'rate', label: '评分', 'x-component': 'rate' },
-      { prop: 'upload', label: '图片上传', 'x-component': 'upload', colSpan: 24 }
+      {
+        prop: 'upload',
+        label: '图片上传',
+        'x-component': 'upload',
+        colSpan: 24,
+        attrs: {
+          action: 'https://jsonplaceholder.typicode.com/posts/'
+        }
+      }
     ]
   };
 
   // 点击设置
   handleClick() {
     this.formData = {
-      name: 'VUE'
+      name: 'VUE',
+      upload:
+        'https://hsfile181029.oss-cn-qingdao.aliyuncs.com/mdss/2001/2020/06/11/1591844915036.jpg?x-oss-process=style/tpys_20'
     };
   }
 

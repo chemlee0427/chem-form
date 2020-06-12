@@ -4,7 +4,7 @@ import { XComponentConfig } from '@/typings/formItem';
 // NOTE: 默认form的配置
 export const defaultFormConfig: IFormConfig = {
   layout: {
-    type: 'table',
+    type: 'default',
     span: 8
   },
   attrs: {
