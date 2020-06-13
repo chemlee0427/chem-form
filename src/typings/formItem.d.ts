@@ -2,7 +2,6 @@ import { VNode } from 'vue';
 
 // 基础配置
 interface baseConfig {
-  defaultValue?: any;
   isRender?: boolean | Function;
   required?: boolean;
   rules?: IFormItemRule[];
@@ -54,6 +53,7 @@ export type XComponentConfig = {
 };
 
 export interface XComponentItemConfig extends baseConfig {
+  defaultValue: any;
   label?: string;
   prop?: string;
 }

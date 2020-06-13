@@ -70,7 +70,7 @@ import DebugTable from './debug.vue';
 })
 export default class extends Vue {
   @Prop({ type: Object, required: true }) scheme!: IFormConfig;
-  @Prop(Object) data!: IFormModel;
+  @Prop(Object) value!: IFormModel;
   @Prop({ type: Array, default: undefined }) auth!: string[] | undefined; // NODE: 认证权限
   @Prop(String) customClass!: string;
   @Provide() Provider = this;
@@ -129,12 +129,12 @@ export default class extends Vue {
     return _defaultConfig;
   }
 
-  // 通过传入配置生成本地数据并赋默认值
+  // 通过传入配置+传入值 + 默认值生成本地数据
   protected _getModelSchemeByConfig(): IFormModel {
     const _model: IFormModel = {};
     this.scheme.items.forEach(formItemConfig => {
       const targetComponentConfig = defaultComponentConfig[formItemConfig['x-component'] || 'input'];
-      _model[formItemConfig.prop] = formItemConfig.defaultValue || targetComponentConfig.defaultValue;
+      _model[formItemConfig.prop] = this.value[formItemConfig.prop] || targetComponentConfig.defaultValue;
     });
     return _model;
   }
@@ -177,19 +177,23 @@ export default class extends Vue {
 
   @Watch('model', { immediate: true, deep: true })
   syncOriginalModel(newValue: IFormModel) {
-    this.$emit('update:data', newValue);
+    this.$emit('input', newValue);
   }
 
   // update every model field when user pass the new Data;
   // * Some of the field data may be not passed in by the user.
   // * We need to set the non-entered field to the default value of the field.
-  @Watch('data', { deep: true })
+  @Watch('value', { deep: true })
   updateModel(newData: IFormModel) {
     const defaultModel = this._getModelSchemeByConfig();
     Object.keys(this.model).forEach(field => {
       const has: boolean = Object.prototype.hasOwnProperty.call(newData, field);
       if (has) this.$set(this.model, field, newData[field]);
       else this.$set(this.model, field, defaultModel[field]);
+    });
+    // NOTE: 针对重置采用formData = {}方式时，进行消除校验信息
+    this.$nextTick(() => {
+      if (Object.keys(newData).length === 0) this.clearValidate();
     });
   }
 

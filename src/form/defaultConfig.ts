@@ -37,8 +37,7 @@ export const defaultComponentConfig: XComponentConfig = {
     supportEntry: true,
     attrs: {
       clearable: true,
-      placeholder: '请选择',
-      'automatic-dropdown': true
+      placeholder: '请选择'
     }
   },
   radio: {

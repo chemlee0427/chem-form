@@ -48,12 +48,15 @@ export default class extends Vue {
 
   @Watch('value', { immediate: true, deep: true })
   listenPropValueChange(newValue: string | Iuploadfile[]) {
+    let cacheValue;
     if (newValue instanceof Array) {
-      this.localValue = newValue;
+      cacheValue = newValue;
     } else {
-      this.localValue = newValue
-        ? newValue.split(',').map((v: string, id: number) => ({ name: `${id + 1}`, url: v }))
-        : [];
+      cacheValue = newValue ? newValue.split(',').map((v: string, id: number) => ({ name: `${id + 1}`, url: v })) : [];
+    }
+
+    if (cacheValue.length !== this.localValue.length) {
+      this.localValue = cacheValue;
     }
   }
 

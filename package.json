@@ -1,15 +1,20 @@
 {
   "name": "chem-form",
-  "version": "0.2.0",
+  "version": "1.0.2",
   "main": "src/form/index.ts",
   "repository": {
     "type": "git",
     "url": "https://github.com/MiracleWorkers/chem-form"
   },
   "keywords": [
-    "Vue",
+    "vue",
     "Element",
-    "form"
+    "form",
+    "Element-ui",
+    "scheme",
+    "schema",
+    "json",
+    ""
   ],
   "scripts": {
     "serve": "vue-cli-service serve",

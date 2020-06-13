@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <debug-table :table-source="formData"></debug-table>
-    <chem-form ref="form" :scheme="formConfig" :data.sync="formData" custom-class="fpx">
+    <chem-form ref="form" :scheme="formConfig" v-model="formData" custom-class="fpx">
       <template #sex="{ model }">
         <el-radio ref="radio1" v-model="model.sex" label="1">插槽进来的1</el-radio>
         <el-radio v-model="model.sex" label="2">插槽进来的2</el-radio>
@@ -29,7 +29,12 @@ import Debug from '../src/form/debug.vue';
 })
 export default class App extends Vue {
   h: Function = this.$createElement;
-  formData: any = {};
+  formData: any = {
+    name: 'React',
+    source: 'Vue',
+    upload:
+      'https://hsfile181029.oss-cn-qingdao.aliyuncs.com/mdss/2001/2020/06/11/1591844915036.jpg?x-oss-process=style/tpys_20'
+  };
   formConfig: IFormConfig = {
     DEBUG: true,
     attrs: {
@@ -68,7 +73,6 @@ export default class App extends Vue {
         prop: 'source',
         label: '来源',
         'x-component': 'select',
-        defaultValue: 'vue',
         source: {
           labelKey: 'label',
           valueKey: 'code',
@@ -107,15 +111,14 @@ export default class App extends Vue {
   // 点击设置
   handleClick() {
     this.formData = {
-      name: 'VUE',
-      upload:
-        'https://hsfile181029.oss-cn-qingdao.aliyuncs.com/mdss/2001/2020/06/11/1591844915036.jpg?x-oss-process=style/tpys_20'
+      ...this.formData,
+      name: 'VUE'
     };
   }
 
   // 重置
   reset() {
-    (this.$refs.form as any).resetForm();
+    this.formData = {};
   }
 
   simulateHttp() {
