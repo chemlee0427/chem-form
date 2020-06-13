@@ -1,7 +1,7 @@
 {
   "name": "chem-form",
-  "version": "1.0.2",
-  "main": "src/form/index.ts",
+  "version": "1.0.3",
+  "main": "src/form/index.js",
   "repository": {
     "type": "git",
     "url": "https://github.com/MiracleWorkers/chem-form"

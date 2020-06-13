@@ -51,6 +51,16 @@ Vue.use(chemForm)
 | scheme  | 表单配置    |         |
 | auth    | 表单权限    | `Array` |
 
+### scheme
+
+| Name     | Description                                                            | params                                          |
+| -------- | ---------------------------------------------------------------------- | ----------------------------------------------- |
+| DEBUG    | 开启调试模式                                                           | Boolean                                         |
+| layout   | 展示的形态 type 为展示类型， span 为表格模式下每个 form\-item 占的大小 | \{ type: "default / inline / table", span: 8 \} |
+| onlyRead | 是否为只读模式                                                         | Boolean                                         |
+| attrs    | 扩充属性 element\-ui 中 form 自带的属性                                | Object                                          |
+| items    | 表单要展示的内容配置                                                   | 参照 form\-item props 配置                      |
+
 ## form methods
 
 | Name          | Description      | callback          | params                         |

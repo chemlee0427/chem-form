@@ -1,9 +1,7 @@
 import Form from './form.vue';
-import { VueConstructor } from 'Vue';
-import { InstallOptions } from '@/typings/form';
 
 const FormPlugin = {
-  install(Vue: VueConstructor, options: InstallOptions = {}) {
+  install(Vue, options = {}) {
     const componentName = options.name || 'chem-form';
     Vue.component(componentName, Form);
   }
