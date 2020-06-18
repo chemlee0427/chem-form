@@ -1,6 +1,6 @@
 import { Component } from 'vue';
 import { Input, InputNumber, Switch, Slider, TimePicker, DatePicker, Rate } from 'element-ui';
-import { XComponentType } from '@/typings/formItem';
+import { XComponentType } from '@/types/formItem';
 
 import Radio from '@/components/BaseRadio.vue';
 import Checkbox from '@/components/BaseCheckbox.vue';

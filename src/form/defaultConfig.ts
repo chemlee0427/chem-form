@@ -1,5 +1,5 @@
-import { IFormConfig } from '@/typings/form';
-import { XComponentConfig } from '@/typings/formItem';
+import { IFormConfig } from '@/types/form';
+import { XComponentConfig } from '@/types/formItem';
 
 // NOTE: 默认form的配置
 export const defaultFormConfig: IFormConfig = {

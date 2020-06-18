@@ -1,5 +1,5 @@
 import { Vue, Component, Prop, Watch } from 'vue-property-decorator';
-import { IFormItemSource } from '@/typings/formItem';
+import { IFormItemSource } from '@/types/formItem';
 import { isFunction, isArray } from '@/utils/index';
 
 @Component
