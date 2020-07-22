@@ -26,7 +26,7 @@
 <script lang="ts">
 import { Vue, Component, Prop, Inject } from 'vue-property-decorator';
 import { FormItem, Popover } from 'element-ui';
-import { IFormItemConfig } from '@/typings/formItem';
+import { IFormItemConfig } from '../types/formItem';
 import defaultComponents from './formItemComponents';
 
 @Component({

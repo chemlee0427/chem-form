@@ -1,19 +1,19 @@
 // 重置input的样式
-/deep/.el-input__inner {
+::v-deep .el-input__inner {
   border-radius: 2px;
   text-align: left;
 }
 
 // 重置表单只读模式的样式
 .x-form-onlyRead {
-  /deep/.el-input.is-disabled .el-input__inner {
+  ::v-deep .el-input.is-disabled .el-input__inner {
     background-color: #fff;
     cursor: default;
   }
 }
 
 // 定义表格模式下，form的展示形式
-/deep/.x-form-layout-table {
+::v-deep .x-form-layout-table {
   display: flex;
   flex-wrap: wrap;
   margin-top: 1px;

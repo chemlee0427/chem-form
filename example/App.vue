@@ -16,7 +16,7 @@
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
-import { IFormConfig } from '@/typings/form';
+import { IFormConfig } from '../src/types/form';
 import { Radio } from 'element-ui';
 import Debug from '../src/form/debug.vue';
 

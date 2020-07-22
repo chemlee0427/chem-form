@@ -51,7 +51,7 @@
 <script lang="ts">
 import { Vue, Component, Prop, Provide, Watch } from 'vue-property-decorator';
 import { Form, FormItem, Row, Col } from 'element-ui';
-import { IFormConfig, IFormModel } from '@/typings/form';
+import { IFormConfig, IFormModel } from '../types/form';
 import { defaultFormConfig, defaultComponentConfig } from './defaultConfig';
 import { isArray, isFunction, deepCopy } from '@/utils/index';
 import XFormItem from './formItem.vue';
